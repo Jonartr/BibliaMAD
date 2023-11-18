@@ -64,33 +64,49 @@ namespace BibliaMAD
             _conexion.Close();
         }
 
-        public bool Autentificar(string us, string ps)
+        public bool Autentificar(string us, string ps, int  admin = 1)
         {
             bool isValid = false;
             try
             {
+                DataTable _tabla = new DataTable();
                 conectar();
-                string qry = "SP_ValidaUser";
+
+                string qry = "Revisar_Login";
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 9000;
 
-                var parametro1 = _comandosql.Parameters.Add("@u", SqlDbType.Char, 20);
+                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 20);
                 parametro1.Value = us;
-                var parametro2 = _comandosql.Parameters.Add("@p", SqlDbType.Char, 20);
+                var parametro2 = _comandosql.Parameters.Add("@Contraseña", SqlDbType.Char, 20);
                 parametro2.Value = ps;
+                var isAdmin = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int, 20);
+                isAdmin.Value = admin;
 
                 _adaptador.SelectCommand = _comandosql;
                 _adaptador.Fill(_tabla);
 
                 if(_tabla.Rows.Count > 0)
                 {
+                  
+                    if(admin == 1){
+                        Variables_globales.usuario = Convert.ToString(_tabla.Rows[0]["Correo"]);
+                        Variables_globales.estatus = Convert.ToInt16(_tabla.Rows[0]["Estatus"]);
+                        Variables_globales.intentos = Convert.ToInt16(_tabla.Rows[0]["Intentos"]);
+                    }
+                    else if (admin  == 2)
+                    {
+                        Variables_globales.usuario = Convert.ToString(_tabla.Rows[0]["Correoadmin"]);
+                    }
+                  
                     isValid = true;
                 }
 
             }
             catch(SqlException e)
             {
+                MessageBox.Show(e.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 isValid = false;
             }
             finally
@@ -101,7 +117,8 @@ namespace BibliaMAD
             return isValid;
         }
 
-        public bool Insert_Users(string Correo, string Contraseña, string Nombre, DateTime Cumple, int Genero)
+        public bool Insert_Users(int Opcion = 0, string Correo = "a", string Contraseña = "b"
+            ,string Nombre = "c", DateTime Cumple = default(DateTime), int Genero = 0)
         {
             bool insert_ok = false;
             try
@@ -113,41 +130,83 @@ namespace BibliaMAD
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 9000;
 
-                var Opcion = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int, 1);
-                Opcion.Value = 1;
+                if (Opcion == 1 || Opcion == 2)
+                {
+                    var Opcion_SQL = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int, 1);
+                    Opcion_SQL.Value = Opcion;
 
-                var NewCorreo = _comandosql.Parameters.Add("@Correo", SqlDbType.VarChar, 100);
-                NewCorreo.Value = Correo;
+                    var NewCorreo = _comandosql.Parameters.Add("@Correo", SqlDbType.VarChar, 100);
+                    NewCorreo.Value = Correo;
 
-                var NewContra = _comandosql.Parameters.Add("@Contraseña", SqlDbType.VarChar, 100);
-                NewContra.Value = Correo;
+                    var NewContra = _comandosql.Parameters.Add("@Contraseña", SqlDbType.VarChar, 100);
+                    NewContra.Value = Contraseña;
 
-                var Newname = _comandosql.Parameters.Add("@Nombre", SqlDbType.VarChar, 100);
-                Newname.Value = Nombre;
+                    var Newname = _comandosql.Parameters.Add("@Nombre", SqlDbType.VarChar, 100);
+                    Newname.Value = Nombre;
 
-                var NewDate = _comandosql.Parameters.Add("@Fecha_nacimiento", SqlDbType.Date, 100);
-                NewDate.Value = Cumple;
+                    var NewDate = _comandosql.Parameters.Add("@Fecha_nacimiento", SqlDbType.Date, 100);
+                    NewDate.Value = Cumple;
 
-                var NewGender = _comandosql.Parameters.Add("@Genero", SqlDbType.Int, 1);
-                NewGender.Value = Genero;
+                    var NewGender = _comandosql.Parameters.Add("@Genero", SqlDbType.Int, 1);
+                    NewGender.Value = Genero;
+                }
+                else if(Opcion == 3)
+                {
+                    var Opcion_SQL = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int, 1);
+                    Opcion_SQL.Value = Opcion;
+
+                    var NewCorreo = _comandosql.Parameters.Add("@Correo", SqlDbType.VarChar, 100);
+                    NewCorreo.Value = Correo;
+
+                    var NewContra = _comandosql.Parameters.Add("@Contraseña", SqlDbType.VarChar, 100);
+                    NewContra.Value = Contraseña;
+
+                    var Newname = _comandosql.Parameters.Add("@Nombre", SqlDbType.VarChar, 100);
+                    Newname.Value = Nombre;
+
+                    var NewDate = _comandosql.Parameters.Add("@Fecha_nacimiento", SqlDbType.Date, 100);
+                    NewDate.Value = Cumple;
+
+                    var NewGender = _comandosql.Parameters.Add("@Genero", SqlDbType.Int, 1);
+                    NewGender.Value = Genero;
+                }
+                else if(Opcion == 4){
+                    var Opcion_SQL = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int, 1);
+                    Opcion_SQL.Value = Opcion;
+
+                    var NewCorreo = _comandosql.Parameters.Add("@Correo", SqlDbType.VarChar, 100);
+                    NewCorreo.Value = Correo;
+
+                    var NewContra = _comandosql.Parameters.Add("@Contraseña", SqlDbType.VarChar, 100);
+                    NewContra.Value = Contraseña;
+
+                    var Newname = _comandosql.Parameters.Add("@Nombre", SqlDbType.VarChar, 100);
+                    Newname.Value = Nombre;
+
+                    var NewDate = _comandosql.Parameters.Add("@Fecha_nacimiento", SqlDbType.Date, 100);
+                    NewDate.Value = Cumple;
+
+                    var NewGender = _comandosql.Parameters.Add("@Genero", SqlDbType.Int, 1);
+                    NewGender.Value = Genero;
+                }
+                
+        
 
                 _adaptador.InsertCommand = _comandosql;
 
                 _comandosql.ExecuteNonQuery();
+
+                insert_ok = true;
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(e.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 insert_ok = false;
             }
             finally
             {
-                if (insert_ok == true)
-                {
-                    MessageBox.Show("Usuario Registrado Correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
+              
                 desconectar();
             }
 
@@ -156,16 +215,16 @@ namespace BibliaMAD
             return insert_ok;
         }
 
-        public DataTable get_Users()
+        public DataTable get_Users()//SE USARA PARA TRAER USUARIOS QUE DESEN REHABILITAR SU CUENTA  
         {
-            var msg = "Soy un mensaje";
+         //   var msg = "Soy un mensaje";
             DataTable tabla = new DataTable();
             try
             {
                 conectar();
 				// Ejemplo de cómo ejecutar un query, 
 				// PERO lo correcto es siempre usar SP para cualquier consulta a la base de datos
-                string qry = "Select * from idiomas;";
+                string qry = "Habilitar_usuario";
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.Text;
                 _comandosql.CommandTimeout = 1200;
@@ -176,20 +235,19 @@ namespace BibliaMAD
                 if (tabla.Rows.Count > 0)
                 {
 
-                    string dato = Convert.ToString(tabla.Rows[0]["Nombre"]);
-                    MessageBox.Show(dato, "Si obtiene datos!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Variables_globales.Consultas = tabla;
+                //    MessageBox.Show(dato, "Si obtiene datos!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else
-                {
-                    MessageBox.Show(msg, "No obtiene datos!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                // else
+                // {
+                //     MessageBox.Show("No hay usuarios", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // }
 
             }
             catch (SqlException e)
             {
-                msg = "Excepción de base de datos: \n";
-                msg += e.Message;
-                MessageBox.Show(msg, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            
+                MessageBox.Show(e.Message, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             finally
             {

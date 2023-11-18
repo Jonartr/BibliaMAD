@@ -117,7 +117,13 @@ namespace BibliaMAD
 
             if(ok == 5)
             {
-                Variables_globales.conexion.Insert_Users(Correo, Contraseña, Nombre, Cumple, OpcGenero);
+              bool register = Variables_globales.conexion.Insert_Users(1 ,Correo, Contraseña, Nombre, Cumple, OpcGenero);
+
+                if (register)
+                {
+                    MessageBox.Show("Usuario Registrado Correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
             }
 
         }

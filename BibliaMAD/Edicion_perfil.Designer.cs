@@ -71,7 +71,7 @@
             this.label2.Location = new System.Drawing.Point(7, 37);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 16);
+            this.label2.Size = new System.Drawing.Size(112, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "Correo electronico:";
             // 
@@ -81,7 +81,7 @@
             this.label3.Location = new System.Drawing.Point(7, 85);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 16);
+            this.label3.Size = new System.Drawing.Size(72, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Contraseña:";
             // 
@@ -99,7 +99,7 @@
             this.label4.Location = new System.Drawing.Point(9, 185);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(111, 16);
+            this.label4.Size = new System.Drawing.Size(110, 16);
             this.label4.TabIndex = 6;
             this.label4.Text = "Nombre completo:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -118,7 +118,7 @@
             this.label5.Location = new System.Drawing.Point(9, 235);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 16);
+            this.label5.Size = new System.Drawing.Size(105, 16);
             this.label5.TabIndex = 8;
             this.label5.Text = "Fecha nacimiento:";
             // 
@@ -128,7 +128,7 @@
             this.label6.Location = new System.Drawing.Point(65, 282);
             this.label6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 16);
+            this.label6.Size = new System.Drawing.Size(50, 16);
             this.label6.TabIndex = 10;
             this.label6.Text = "Genero:";
             // 
@@ -192,7 +192,7 @@
             this.label7.Location = new System.Drawing.Point(7, 134);
             this.label7.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(130, 16);
+            this.label7.Size = new System.Drawing.Size(129, 16);
             this.label7.TabIndex = 14;
             this.label7.Text = "Confirmar contraseña:";
             // 
@@ -205,6 +205,7 @@
             this.registerbutton.TabIndex = 14;
             this.registerbutton.Text = "Actualizar";
             this.registerbutton.UseVisualStyleBackColor = true;
+            this.registerbutton.Click += new System.EventHandler(this.registerbutton_Click);
             // 
             // Edicion_perfil
             // 

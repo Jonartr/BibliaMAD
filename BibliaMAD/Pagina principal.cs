@@ -56,17 +56,27 @@ namespace BibliaMAD
 
         private void inhabilitarseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("¿Desea eliminar su cuenta?", "Aviso", MessageBoxButtons.YesNo);
+            var deshabilitar = MessageBox.Show("¿Desea deshabilitar su cuenta?", "Aviso", MessageBoxButtons.YesNo);
+           if (deshabilitar == DialogResult.Yes)
+            {
+                Variables_globales.conexion.Insert_Users(3, Variables_globales.usuario);
+                MessageBox.Show("Cuenta Deshabilitada,\ncontacte a un adminstrador en caso" +
+                    " de querer reingresar, hasta luego", "Aviso", MessageBoxButtons.OK);
+                this.Close();
+            }
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Variables_globales.conexion.get_Users();
+     
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
         }
+
+     
     }
 }

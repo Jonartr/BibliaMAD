@@ -24,6 +24,12 @@ namespace BibliaMAD
 
         private void Administrador_Load(object sender, EventArgs e)
         {
+          Variables_globales.conexion.get_Users();
+            dataGridView1.DataSource = Variables_globales.Consultas;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

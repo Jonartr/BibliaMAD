@@ -32,18 +32,66 @@ namespace BibliaMAD
 
         private void loginbutton_Click(object sender, EventArgs e)
         {
-            if (Variables_globales.admin)
+            var Correo = email.Text;
+            var Contraseña = password.Text;
+            var Admin = 1;
+            if (checkadmin.Checked)
             {
-            //    var administrador = new Administrador();
-                Variables_globales.adminis.ShowDialog();
+                //SE PONE 1 SI ES USUARIO, SE PONE 2 SI ES ADMINISTRADOR
+                Admin = 2;
+            }
+
+            bool existe = Variables_globales.conexion.Autentificar(Correo, Contraseña, Admin);
+            if (checkadmin.Checked)
+            {
+
+            }
+
+
+            if (existe == true)
+            {
+              if(Admin == 1) 
+              {
+                    if (Variables_globales.estatus == 1)
+                    {
+                      
+                            var perfil = new Pagina_principal();
+                            Variables_globales.inicio.ShowDialog();
+
+                   
+                    }
+                    else
+                    {
+                        if (Variables_globales.estatus == 0 && Variables_globales.intentos > 0)
+                        {
+                            MessageBox.Show("Este correo esta deshabilitado" +
+                          "\ncontacte a un administrador para rehabilitarlo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        } 
+                        else if (Variables_globales.estatus == 0 && Variables_globales.intentos == 0)
+                        {
+                            MessageBox.Show("Este correo esta deshabilitado por ingreso de contraseñas incorrectas" +
+                         "\ncontacte a un administrador para rehabilitarlo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
+
+                    }
+              }
+              else if (Admin == 2)
+              {
+                        var administrador = new Administrador();
+                        Variables_globales.adminis.ShowDialog();
+              }
+               
+              
             }
             else
             {
-          //     var perfil = new Pagina_principal();
-                Variables_globales.inicio.ShowDialog();
+                MessageBox.Show("Correo no existe", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
-         
+
+
+
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
