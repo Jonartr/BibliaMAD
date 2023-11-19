@@ -35,6 +35,6 @@ create table ejemplo(
 
 select * from ejemplo;
 
-insert into ejemplo(Nombre) values('Hola');
+insert into ejemplo(Nombresote) values('Hola');
  
  */
