@@ -31,6 +31,7 @@ namespace BibliaMAD
     {
         static private string _aux { set; get; }
         static private SqlConnection _conexion;
+        static private DataTable _resultadoBusqueda;
         static private SqlDataAdapter _adaptador = new SqlDataAdapter();
         static private SqlCommand _comandosql = new SqlCommand();
         static private DataTable _tabla = new DataTable();
@@ -213,6 +214,66 @@ namespace BibliaMAD
        
 
             return insert_ok;
+        }
+
+        public DataTable ResultadoBusqueda
+        {
+            get { return _resultadoBusqueda; }
+        }
+
+        public bool BuscarPalabras(int Opcion = 0, string PalabraBuscada = "", int Id_Idioma = 0, int Id_Testamento = 0, int Id_Version = 0, int Id_Libro = 0, int Id_Capitulo = 0)
+        {
+            bool search_ok = false;
+            try
+            {
+                conectar();
+                string qry = "BuscarPalabras"; // Reemplaza con el nombre de tu procedimiento almacenado de búsqueda
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 9000;
+
+                var Opcion_SQL = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int, 1);
+                Opcion_SQL.Value = Opcion;
+
+                var PalabraParam = _comandosql.Parameters.Add("@PalabraBuscada", SqlDbType.NVarChar, 100);
+                PalabraParam.Value = PalabraBuscada;
+
+                var IdIdiomaParam = _comandosql.Parameters.Add("@Id_Idioma", SqlDbType.SmallInt);
+                IdIdiomaParam.Value = Id_Idioma;
+
+                var IdTestamentoParam = _comandosql.Parameters.Add("@Id_Testamento", SqlDbType.SmallInt);
+                IdTestamentoParam.Value = Id_Testamento;
+
+                var IdVersionParam = _comandosql.Parameters.Add("@Id_Version", SqlDbType.SmallInt);
+                IdVersionParam.Value = Id_Version;
+
+                var IdLibroParam = _comandosql.Parameters.Add("@Id_Libro", SqlDbType.SmallInt);
+                IdLibroParam.Value = Id_Libro;
+
+                var IdCapituloParam = _comandosql.Parameters.Add("@Id_Capitulo", SqlDbType.SmallInt);
+                IdCapituloParam.Value = Id_Capitulo;
+
+                _adaptador.SelectCommand = _comandosql;
+
+                // Inicializa el DataTable antes de llenarlo
+                _resultadoBusqueda = new DataTable();
+
+                // Llena el DataTable con los resultados de la búsqueda
+                _adaptador.Fill(_resultadoBusqueda);
+
+                search_ok = true;
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                search_ok = false;
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return search_ok;
         }
 
         public DataTable get_Users()//SE USARA PARA TRAER USUARIOS QUE DESEN REHABILITAR SU CUENTA  
