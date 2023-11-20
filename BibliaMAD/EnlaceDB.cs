@@ -131,8 +131,7 @@ namespace BibliaMAD
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 9000;
 
-                if (Opcion == 1 || Opcion == 2)
-                {
+               
                     var Opcion_SQL = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int, 1);
                     Opcion_SQL.Value = Opcion;
 
@@ -150,46 +149,7 @@ namespace BibliaMAD
 
                     var NewGender = _comandosql.Parameters.Add("@Genero", SqlDbType.Int, 1);
                     NewGender.Value = Genero;
-                }
-                else if(Opcion == 3)
-                {
-                    var Opcion_SQL = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int, 1);
-                    Opcion_SQL.Value = Opcion;
-
-                    var NewCorreo = _comandosql.Parameters.Add("@Correo", SqlDbType.VarChar, 100);
-                    NewCorreo.Value = Correo;
-
-                    var NewContra = _comandosql.Parameters.Add("@Contraseña", SqlDbType.VarChar, 100);
-                    NewContra.Value = Contraseña;
-
-                    var Newname = _comandosql.Parameters.Add("@Nombre", SqlDbType.VarChar, 100);
-                    Newname.Value = Nombre;
-
-                    var NewDate = _comandosql.Parameters.Add("@Fecha_nacimiento", SqlDbType.Date, 100);
-                    NewDate.Value = Cumple;
-
-                    var NewGender = _comandosql.Parameters.Add("@Genero", SqlDbType.Int, 1);
-                    NewGender.Value = Genero;
-                }
-                else if(Opcion == 4){
-                    var Opcion_SQL = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int, 1);
-                    Opcion_SQL.Value = Opcion;
-
-                    var NewCorreo = _comandosql.Parameters.Add("@Correo", SqlDbType.VarChar, 100);
-                    NewCorreo.Value = Correo;
-
-                    var NewContra = _comandosql.Parameters.Add("@Contraseña", SqlDbType.VarChar, 100);
-                    NewContra.Value = Contraseña;
-
-                    var Newname = _comandosql.Parameters.Add("@Nombre", SqlDbType.VarChar, 100);
-                    Newname.Value = Nombre;
-
-                    var NewDate = _comandosql.Parameters.Add("@Fecha_nacimiento", SqlDbType.Date, 100);
-                    NewDate.Value = Cumple;
-
-                    var NewGender = _comandosql.Parameters.Add("@Genero", SqlDbType.Int, 1);
-                    NewGender.Value = Genero;
-                }
+              
                 
         
 
@@ -290,6 +250,8 @@ namespace BibliaMAD
                 _comandosql.CommandType = CommandType.Text;
                 _comandosql.CommandTimeout = 1200;
 
+
+
                 _adaptador.SelectCommand = _comandosql;
                 _adaptador.Fill(tabla);
 
@@ -318,8 +280,57 @@ namespace BibliaMAD
             return tabla;
         }
 
-		// Ejemplo de método para recibir una consulta en forma de tabla
-		// Cuando el SP ejecutará un SELECT
+        public DataTable EDGetUser(string Correo)//Traera datos a la ventana de editar perfil
+        {
+            //   var msg = "Soy un mensaje";
+            DataTable tabla = new DataTable();
+            try
+            {
+                conectar();
+                // Ejemplo de cómo ejecutar un query, 
+                // PERO lo correcto es siempre usar SP para cualquier consulta a la base de datos
+                string qry = "Consulta_Usuario";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+                var GetCorreo = _comandosql.Parameters.Add("@Correo", SqlDbType.VarChar, 100);
+                GetCorreo.Value = Correo;
+
+              //  _adaptador.InsertCommand = _comandosql;
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(tabla);
+
+                if (tabla.Rows.Count > 0)
+                {
+
+                    Variables_globales.Consultas = tabla;
+                    //    MessageBox.Show(dato, "Si obtiene datos!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+
+
+         
+            }
+            catch (SqlException e)
+            {
+
+                MessageBox.Show(e.Message, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return tabla;
+        }
+
+ 
+
+
+
+        // Ejemplo de método para recibir una consulta en forma de tabla
+        // Cuando el SP ejecutará un SELECT
         public DataTable get_Deptos(string opc)
         {
             var msg = "";
@@ -335,7 +346,7 @@ namespace BibliaMAD
                 var parametro1 = _comandosql.Parameters.Add("@Opc", SqlDbType.Char, 1);
                 parametro1.Value = opc;
 
-
+          
                 _adaptador.SelectCommand = _comandosql;
                 _adaptador.Fill(tabla);
 

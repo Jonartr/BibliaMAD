@@ -54,11 +54,8 @@ namespace BibliaMAD
               {
                     if (Variables_globales.estatus == 1)
                     {
-                      
                             var perfil = new Pagina_principal();
                             Variables_globales.inicio.ShowDialog();
-
-                   
                     }
                     else
                     {

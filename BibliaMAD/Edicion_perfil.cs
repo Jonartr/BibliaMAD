@@ -35,6 +35,12 @@ namespace BibliaMAD
 
         private void Edicion_perfil_Load(object sender, EventArgs e)
         {
+            Variables_globales.conexion.EDGetUser(Variables_globales.usuario);
+           emailregister.Text = Convert.ToString(Variables_globales.Consultas.Rows[0]["Correo"]);
+           nameregister.Text = Convert.ToString(Variables_globales.Consultas.Rows[0]["Nombre"]);
+           dateregister.Value = Convert.ToDateTime(Variables_globales.Consultas.Rows[0]["Fecha_nacimiento"]);
+           genreregister.Text= Convert.ToString(Variables_globales.Consultas.Rows[0]["Genero"]);
+
 
         }
 
