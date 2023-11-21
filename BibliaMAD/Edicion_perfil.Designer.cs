@@ -48,7 +48,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Book Antiqua", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(200, 61);
+            this.label1.Location = new System.Drawing.Point(223, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(165, 26);
             this.label1.TabIndex = 0;
@@ -156,6 +156,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.registerbutton);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.genreregister);
             this.groupBox1.Controls.Add(this.emailregister);
@@ -166,7 +167,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.nameregister);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(14, 126);
+            this.groupBox1.Location = new System.Drawing.Point(31, 57);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
@@ -178,7 +179,7 @@
             // 
             // registerbutton
             // 
-            this.registerbutton.Location = new System.Drawing.Point(156, 482);
+            this.registerbutton.Location = new System.Drawing.Point(197, 265);
             this.registerbutton.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.registerbutton.Name = "registerbutton";
             this.registerbutton.Size = new System.Drawing.Size(87, 27);
@@ -191,14 +192,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 554);
-            this.Controls.Add(this.registerbutton);
+            this.ClientSize = new System.Drawing.Size(624, 441);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "Edicion_perfil";
-            this.Text = "Registro";
+            this.Text = "Edicion de perfil";
             this.Load += new System.EventHandler(this.Edicion_perfil_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

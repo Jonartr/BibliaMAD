@@ -143,7 +143,7 @@ namespace BibliaMAD
 
                 if (register)
                 {
-                    MessageBox.Show("Usuario Registrado Correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Informacion actualizada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
             }

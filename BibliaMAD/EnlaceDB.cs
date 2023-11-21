@@ -322,24 +322,21 @@ namespace BibliaMAD
 
         // Ejemplo de método para recibir una consulta en forma de tabla
         // Cuando el SP ejecutará un SELECT
-        public DataTable get_Deptos(string opc)
+        public DataTable Get_Books()
         {
             var msg = "";
             DataTable tabla = new DataTable();
             try
             {
                 conectar();
-                string qry = "sp_Gestiona_Deptos";
+                string qry = "TraeLibros";
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 1200;
-
-                var parametro1 = _comandosql.Parameters.Add("@Opc", SqlDbType.Char, 1);
-                parametro1.Value = opc;
-
-          
                 _adaptador.SelectCommand = _comandosql;
                 _adaptador.Fill(tabla);
+
+                Variables_globales.Consultas = tabla;
 
             }
             catch (SqlException e)

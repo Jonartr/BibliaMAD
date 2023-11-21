@@ -40,15 +40,20 @@ namespace BibliaMAD
         private void button1_Click(object sender, EventArgs e)
         {
             int ok = 0; // Contador para validar si todo está correcto
+         
+
+
 
             var PalabraBuscada = Palabras.Text;
-            var Id_Idioma = (int)Idioma.SelectedValue; // Ajusta según la estructura de tu ComboBox
-            var Id_Testamento = (int)Testamento.SelectedValue; // Ajusta según la estructura de tu ComboBox
-            var Id_Version = (int)Version.SelectedValue; // Ajusta según la estructura de tu ComboBox
-            var Id_Libro = (int)Libro.SelectedValue; // Ajusta según la estructura de tu ComboBox
-            var Id_Capitulo = (int)Capitulo.SelectedValue;
+            var Id_Idioma = Idioma.SelectedText;
+            var Id_Testamento =Testamento.SelectedText;
+            var Id_Version = Version.SelectedText;
+            var Id_Libro = Libro.SelectedText;
+            var Id_Capitulo = Capitulo.SelectedText;
+            
 
-            if (Id_Idioma > 0) // Ajusta según la lógica de tu aplicación
+
+            if (Id_Idioma > 0) 
             {
                 ok++;
             }
@@ -57,8 +62,8 @@ namespace BibliaMAD
                 MessageBox.Show("Seleccione un idioma", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            // Validación del testamento
-            if (Id_Testamento > 0) // Ajusta según la lógica de tu aplicación
+           
+            if (Id_Testamento > 0) 
             {
                 ok++;
             }
@@ -67,8 +72,8 @@ namespace BibliaMAD
                 MessageBox.Show("Seleccione un testamento", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            // Validación de la versión
-            if (Id_Version > 0) // Ajusta según la lógica de tu aplicación
+          
+            if (Id_Version > 0) 
             {
                 ok++;
             }
@@ -77,8 +82,8 @@ namespace BibliaMAD
                 MessageBox.Show("Seleccione una versión", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            // Validación del libro
-            if (Id_Libro > 0) // Ajusta según la lógica de tu aplicación
+          
+            if (Id_Libro > 0) 
             {
                 ok++;
             }
@@ -86,7 +91,7 @@ namespace BibliaMAD
             {
                 MessageBox.Show("Seleccione un libro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            if (Id_Capitulo > 0) // Ajusta según la lógica de tu aplicación
+            if (Id_Capitulo > 0) 
             {
                 ok++;
             }
@@ -95,9 +100,9 @@ namespace BibliaMAD
                 MessageBox.Show("Seleccione un Capitulo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            // Fin del resto del código de validación...
+          
 
-            if (ok == 5) // Ajusta según el número total de condiciones de validación
+            if (ok == 5) 
             {
                 bool searchResult = Variables_globales.conexion.BuscarPalabras(1, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro,  Id_Capitulo);
 
@@ -116,6 +121,50 @@ namespace BibliaMAD
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void Consultas_Load(object sender, EventArgs e)
+        {
+            Variables_globales.conexion.Get_Books();
+            /*
+                      
+                   Id_Idioma = (int)Idioma.SelectedValue;
+                   Id_Testamento = (int)Testamento.SelectedValue;
+                   Id_Version = (int)Version.SelectedValue;
+                   Id_Libro = (int)Libro.SelectedValue;
+                   Id_Capitulo = (int)Capitulo.SelectedValue;*/
+            foreach (DataRow row in Variables_globales.Consultas.Rows)
+            {
+                // Llenar ComboBox para Id_Version
+                if (!Idioma.Items.Contains(row["NombreIdioma"]))
+                {
+                    Idioma.Items.Add(row["NombreIdioma"]);
+                }
+
+              
+                if (!Libro.Items.Contains(row["NombreLibro"]))
+                {
+                    Libro.Items.Add(row["NombreLibro"]);
+                }
+
+                if (!Version.Items.Contains(row["NombreVersion"]))
+                {
+                    Version.Items.Add(row["NombreVersion"]);
+                }
+
+                if (!Capitulo.Items.Contains(row["NumeroCap"]))
+                {
+                    Capitulo.Items.Add(row["NumeroCap"]);
+                }
+
+                if (!Testamento.Items.Contains(row["NombreTestamento"]))
+                {
+                    Testamento.Items.Add(row["NombreTestamento"]);
+                }
+
+            }
+
 
         }
     }
