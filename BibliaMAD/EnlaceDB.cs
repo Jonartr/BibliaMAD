@@ -187,7 +187,7 @@ namespace BibliaMAD
             try
             {
                 conectar();
-                string qry = "BuscarPalabras"; // Reemplaza con el nombre de tu procedimiento almacenado de búsqueda
+                string qry = "BuscarPalabras"; 
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 9000;
@@ -215,10 +215,9 @@ namespace BibliaMAD
 
                 _adaptador.SelectCommand = _comandosql;
 
-                // Inicializa el DataTable antes de llenarlo
                 _resultadoBusqueda = new DataTable();
 
-                // Llena el DataTable con los resultados de la búsqueda
+     
                 _adaptador.Fill(_resultadoBusqueda);
 
                 search_ok = true;
@@ -257,14 +256,9 @@ namespace BibliaMAD
 
                 if (tabla.Rows.Count > 0)
                 {
-
                     Variables_globales.Consultas = tabla;
-                //    MessageBox.Show(dato, "Si obtiene datos!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                // else
-                // {
-                //     MessageBox.Show("No hay usuarios", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                // }
+
 
             }
             catch (SqlException e)
@@ -287,7 +281,6 @@ namespace BibliaMAD
             try
             {
                 conectar();
-                // Ejemplo de cómo ejecutar un query, 
                 // PERO lo correcto es siempre usar SP para cualquier consulta a la base de datos
                 string qry = "Consulta_Usuario";
                 _comandosql = new SqlCommand(qry, _conexion);
@@ -303,9 +296,7 @@ namespace BibliaMAD
 
                 if (tabla.Rows.Count > 0)
                 {
-
                     Variables_globales.Consultas = tabla;
-                    //    MessageBox.Show(dato, "Si obtiene datos!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
 

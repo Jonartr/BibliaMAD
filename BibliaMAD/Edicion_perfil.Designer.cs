@@ -40,8 +40,6 @@
             this.dateregister = new System.Windows.Forms.DateTimePicker();
             this.genreregister = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.passregister2 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.registerbutton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +60,7 @@
             this.emailregister.Location = new System.Drawing.Point(142, 32);
             this.emailregister.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.emailregister.Name = "emailregister";
+            this.emailregister.ReadOnly = true;
             this.emailregister.Size = new System.Drawing.Size(266, 22);
             this.emailregister.TabIndex = 1;
             // 
@@ -90,13 +89,14 @@
             this.passregister.Location = new System.Drawing.Point(142, 81);
             this.passregister.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.passregister.Name = "passregister";
+            this.passregister.PasswordChar = '*';
             this.passregister.Size = new System.Drawing.Size(266, 22);
             this.passregister.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 185);
+            this.label4.Location = new System.Drawing.Point(9, 125);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(110, 16);
@@ -106,7 +106,7 @@
             // 
             // nameregister
             // 
-            this.nameregister.Location = new System.Drawing.Point(142, 181);
+            this.nameregister.Location = new System.Drawing.Point(142, 121);
             this.nameregister.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.nameregister.Name = "nameregister";
             this.nameregister.Size = new System.Drawing.Size(266, 22);
@@ -115,7 +115,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 235);
+            this.label5.Location = new System.Drawing.Point(9, 175);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(105, 16);
@@ -125,7 +125,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(65, 282);
+            this.label6.Location = new System.Drawing.Point(65, 222);
             this.label6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 16);
@@ -134,7 +134,7 @@
             // 
             // dateregister
             // 
-            this.dateregister.Location = new System.Drawing.Point(142, 229);
+            this.dateregister.Location = new System.Drawing.Point(142, 169);
             this.dateregister.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.dateregister.Name = "dateregister";
             this.dateregister.Size = new System.Drawing.Size(287, 22);
@@ -148,7 +148,7 @@
             "Femenino",
             "Prefiero no responder",
             "Si"});
-            this.genreregister.Location = new System.Drawing.Point(142, 278);
+            this.genreregister.Location = new System.Drawing.Point(142, 218);
             this.genreregister.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.genreregister.Name = "genreregister";
             this.genreregister.Size = new System.Drawing.Size(181, 24);
@@ -156,8 +156,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.passregister2);
-            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.genreregister);
             this.groupBox1.Controls.Add(this.emailregister);
@@ -177,24 +175,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos del perfil";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
-            // 
-            // passregister2
-            // 
-            this.passregister2.Location = new System.Drawing.Point(142, 130);
-            this.passregister2.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
-            this.passregister2.Name = "passregister2";
-            this.passregister2.Size = new System.Drawing.Size(266, 22);
-            this.passregister2.TabIndex = 13;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 134);
-            this.label7.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(129, 16);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Confirmar contraseña:";
             // 
             // registerbutton
             // 
@@ -241,8 +221,6 @@
         private System.Windows.Forms.DateTimePicker dateregister;
         private System.Windows.Forms.ComboBox genreregister;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox passregister2;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button registerbutton;
     }
 }

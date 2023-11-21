@@ -35,11 +35,20 @@ namespace BibliaMAD
 
         private void Edicion_perfil_Load(object sender, EventArgs e)
         {
-            Variables_globales.conexion.EDGetUser(Variables_globales.usuario);
-           emailregister.Text = Convert.ToString(Variables_globales.Consultas.Rows[0]["Correo"]);
-           nameregister.Text = Convert.ToString(Variables_globales.Consultas.Rows[0]["Nombre"]);
-           dateregister.Value = Convert.ToDateTime(Variables_globales.Consultas.Rows[0]["Fecha_nacimiento"]);
-           genreregister.Text= Convert.ToString(Variables_globales.Consultas.Rows[0]["Genero"]);
+            try
+            {
+                Variables_globales.conexion.EDGetUser(Variables_globales.usuario);
+                emailregister.Text = Convert.ToString(Variables_globales.Consultas.Rows[0]["Correo"]);
+                nameregister.Text = Convert.ToString(Variables_globales.Consultas.Rows[0]["Nombre"]);
+                dateregister.Value = Convert.ToDateTime(Variables_globales.Consultas.Rows[0]["Fecha_nacimiento"]);
+                genreregister.Text = Convert.ToString(Variables_globales.Consultas.Rows[0]["Genero"]);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+
 
 
         }
@@ -60,14 +69,11 @@ namespace BibliaMAD
 
             var Correo = emailregister.Text;
             var Contraseña = passregister.Text;
-            var Contraseña2 = passregister2.Text;
+          //  var Contraseña2 = passregister2.Text;
             var Nombre = nameregister.Text;
             var Genero = genreregister.Text;
             var Cumple = dateregister.Value;
             var OpcGenero = 0;
-
-
-
 
             if (regexemail.IsMatch(Correo) && emailregister.Text != null)
             {
@@ -89,14 +95,21 @@ namespace BibliaMAD
 
             }
 
-            if (Contraseña.Equals(Contraseña2) && passregister2.Text != null)
-            {
-                ok++;
-            }
-            else
-            {
-                MessageBox.Show("Las contraseñas no coinciden", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+            var existe = false;
+            for(int i  = 0; i <Convert.ToInt16(Variables_globales.Consultas.Rows.Count); i++)
+            {
+                if (Contraseña.Equals(Convert.ToString(Variables_globales.Consultas.Rows[i]["Contraseña"])))
+                {
+                    MessageBox.Show("La contraseña no debe ser igual a las " +
+                        "\nultimas 2 contraseñas ingresadas", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    existe = true;
+                }
+               
+            }
+
+            if (!existe){
+                ok++;
             }
 
             if (regexletter.IsMatch(Nombre) && nameregister!=null)
