@@ -57,12 +57,13 @@ namespace BibliaMAD
         private void inhabilitarseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var deshabilitar = MessageBox.Show("¿Desea deshabilitar su cuenta?", "Aviso", MessageBoxButtons.YesNo);
-           if (deshabilitar == DialogResult.Yes)
+            if (deshabilitar == DialogResult.Yes)
             {
-                Variables_globales.conexion.Insert_Users(3, Variables_globales.usuario);
-                MessageBox.Show("Cuenta Deshabilitada,\ncontacte a un adminstrador en caso" +
-                    " de querer reingresar, hasta luego", "Aviso", MessageBoxButtons.OK);
-                this.Close();
+            bool success =  Variables_globales.conexion.DeleteHistory(Variables_globales.usuario);
+                if (success)
+                {
+                    MessageBox.Show("Historial Borrado Correctamente", "Aviso", MessageBoxButtons.OK,MessageBoxIcon.Information); ;
+                }
             }
            
         }
@@ -77,6 +78,9 @@ namespace BibliaMAD
 
         }
 
-     
+        private void Pagina_principal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

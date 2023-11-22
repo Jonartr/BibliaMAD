@@ -352,27 +352,26 @@ namespace BibliaMAD
 		
 		// Ejemplo de método para ejecutar un SP que no se espera que regrese información, solo que ejecute
 		// ya sea un INSERT, UPDATE o DELETE
-        public bool Add_Deptos(string opc, string depto)
+        public bool DeleteHistory(string Correo)
         {
             var msg = "";
-            var add = true;
+            var add = false;
             try
             {
                 conectar();
-                string qry = "sp_Gestiona_Deptos";
+                string qry = "BorrarHistorialUsuarioActivo";
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 1200;
 
-                var parametro1 = _comandosql.Parameters.Add("@Opc", SqlDbType.Char, 1);
-                parametro1.Value = opc;
-                var parametro2 = _comandosql.Parameters.Add("@Nombre", SqlDbType.VarChar, 20);
-                parametro2.Value = depto;
+                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 50);
+                parametro1.Value = Correo;
 
                 _adaptador.InsertCommand = _comandosql;
                 
                 _comandosql.ExecuteNonQuery();
 
+                add = true;
             }
             catch (SqlException e)
             {

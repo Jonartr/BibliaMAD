@@ -166,6 +166,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Pagina_principal";
             this.Text = "Pagina principal";
+            this.Load += new System.EventHandler(this.Pagina_principal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
