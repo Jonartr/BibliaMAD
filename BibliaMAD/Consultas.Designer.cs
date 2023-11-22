@@ -49,12 +49,14 @@
             // 
             // Capitulo
             // 
+            this.Capitulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Capitulo.FormattingEnabled = true;
             this.Capitulo.Location = new System.Drawing.Point(79, 36);
             this.Capitulo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Capitulo.Name = "Capitulo";
             this.Capitulo.Size = new System.Drawing.Size(140, 24);
             this.Capitulo.TabIndex = 3;
+            this.Capitulo.SelectedIndexChanged += new System.EventHandler(this.Capitulo_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -131,6 +133,7 @@
             // 
             // Idioma
             // 
+            this.Idioma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Idioma.FormattingEnabled = true;
             this.Idioma.Location = new System.Drawing.Point(79, 146);
             this.Idioma.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -140,6 +143,7 @@
             // 
             // Testamento
             // 
+            this.Testamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Testamento.FormattingEnabled = true;
             this.Testamento.Location = new System.Drawing.Point(314, 146);
             this.Testamento.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -149,6 +153,7 @@
             // 
             // Version
             // 
+            this.Version.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Version.FormattingEnabled = true;
             this.Version.Location = new System.Drawing.Point(491, 98);
             this.Version.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -185,6 +190,7 @@
             // 
             // Libro
             // 
+            this.Libro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Libro.FormattingEnabled = true;
             this.Libro.Location = new System.Drawing.Point(287, 36);
             this.Libro.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

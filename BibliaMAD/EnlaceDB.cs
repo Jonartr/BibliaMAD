@@ -181,7 +181,7 @@ namespace BibliaMAD
             get { return _resultadoBusqueda; }
         }
 
-        public bool BuscarPalabras(int Opcion = 0, string PalabraBuscada = "", int Id_Idioma = 0, int Id_Testamento = 0, int Id_Version = 0, int Id_Libro = 0, int Id_Capitulo = 0)
+        public bool BuscarPalabras( string PalabraBuscada = "", int Id_Idioma = 0, int Id_Testamento = 0, int Id_Version = 0, int Id_Libro = 0, int Id_Capitulo = 0)
         {
             bool search_ok = false;
             try
@@ -191,9 +191,6 @@ namespace BibliaMAD
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 9000;
-
-                var Opcion_SQL = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int, 1);
-                Opcion_SQL.Value = Opcion;
 
                 var PalabraParam = _comandosql.Parameters.Add("@PalabraBuscada", SqlDbType.NVarChar, 100);
                 PalabraParam.Value = PalabraBuscada;

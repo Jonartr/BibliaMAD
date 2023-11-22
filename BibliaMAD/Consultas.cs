@@ -40,21 +40,27 @@ namespace BibliaMAD
         private void button1_Click(object sender, EventArgs e)
         {
             int ok = 0; // Contador para validar si todo está correcto
-         
 
 
+            int Id_Idioma = 0;
+            int Id_Testamento = 0;
+            int Id_Version = 0;
+            int Id_Libro = 0;
+            int Id_Capitulo = 0;
 
             var PalabraBuscada = Palabras.Text;
-            var Id_Idioma = Idioma.SelectedText;
-            var Id_Testamento =Testamento.SelectedText;
-            var Id_Version = Version.SelectedText;
-            var Id_Libro = Libro.SelectedText;
-            var Id_Capitulo = Capitulo.SelectedText;
-            
+            var TextIdioma = Idioma.Text;
+            var TextTestamento = Testamento.Text;
+            var TextVersion = Version.Text; 
+            var TextLibro = Libro.Text;
+            Id_Capitulo = Convert.ToInt16(Capitulo.Text);
 
 
-            if (Id_Idioma > 0) 
+
+
+            if (TextIdioma.Equals("Español"))
             {
+                Id_Idioma = 1;
                 ok++;
             }
             else
@@ -62,9 +68,10 @@ namespace BibliaMAD
                 MessageBox.Show("Seleccione un idioma", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-           
-            if (Id_Testamento > 0) 
+
+            if (TextTestamento.Equals("ANTIGUO TESTAMENTO"))
             {
+                Id_Testamento = 1;
                 ok++;
             }
             else
@@ -72,9 +79,10 @@ namespace BibliaMAD
                 MessageBox.Show("Seleccione un testamento", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-          
-            if (Id_Version > 0) 
+
+            if (TextVersion.Equals("REINA VALERA 1960"))
             {
+                Id_Version = 1; 
                 ok++;
             }
             else
@@ -82,16 +90,27 @@ namespace BibliaMAD
                 MessageBox.Show("Seleccione una versión", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-          
-            if (Id_Libro > 0) 
+
+            if (TextLibro.Equals("Génesis"))
             {
+                Id_Libro = 1;
                 ok++;
             }
             else
             {
-                MessageBox.Show("Seleccione un libro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Seleccione una versión", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            if (Id_Capitulo > 0) 
+
+
+            //if (Id_Libro > 0) 
+            //{
+            //    ok++;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Seleccione un libro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
+            if (Id_Capitulo != 0)
             {
                 ok++;
             }
@@ -100,11 +119,11 @@ namespace BibliaMAD
                 MessageBox.Show("Seleccione un Capitulo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-          
+
 
             if (ok == 5) 
             {
-                bool searchResult = Variables_globales.conexion.BuscarPalabras(1, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro,  Id_Capitulo);
+                bool searchResult = Variables_globales.conexion.BuscarPalabras(PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro,  Id_Capitulo);
 
                 if (searchResult)
                 {
@@ -136,35 +155,40 @@ namespace BibliaMAD
                    Id_Capitulo = (int)Capitulo.SelectedValue;*/
             foreach (DataRow row in Variables_globales.Consultas.Rows)
             {
-                // Llenar ComboBox para Id_Version
+              
                 if (!Idioma.Items.Contains(row["NombreIdioma"]))
                 {
-                    Idioma.Items.Add(row["NombreIdioma"]);
+                    Idioma.Items.Add(row["NombreIdioma"].ToString());
                 }
 
               
                 if (!Libro.Items.Contains(row["NombreLibro"]))
                 {
-                    Libro.Items.Add(row["NombreLibro"]);
+                    Libro.Items.Add(row["NombreLibro"].ToString());
                 }
 
                 if (!Version.Items.Contains(row["NombreVersion"]))
                 {
-                    Version.Items.Add(row["NombreVersion"]);
+                    Version.Items.Add(row["NombreVersion"].ToString());
                 }
 
                 if (!Capitulo.Items.Contains(row["NumeroCap"]))
                 {
-                    Capitulo.Items.Add(row["NumeroCap"]);
+                    Capitulo.Items.Add(row["NumeroCap"].ToString());
                 }
 
                 if (!Testamento.Items.Contains(row["NombreTestamento"]))
                 {
-                    Testamento.Items.Add(row["NombreTestamento"]);
+                    Testamento.Items.Add(row["NombreTestamento"].ToString());
                 }
 
             }
 
+
+        }
+
+        private void Capitulo_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }
