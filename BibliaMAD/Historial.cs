@@ -12,14 +12,20 @@ namespace BibliaMAD
 {
     public partial class Historial : Form
     {
+        private string correoUsuarioActual;
         public Historial()
         {
             InitializeComponent();
+            this.Load += Historial_Load;
         }
 
         private void Historial_Load(object sender, EventArgs e)
         {
+            
+            DataTable datos = Variables_globales.conexion.MostrarHistorialUsuarioActivo(correoUsuarioActual);
 
+            
+            dataGridView1.DataSource = datos;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,6 +43,11 @@ namespace BibliaMAD
                     " de querer reingresar, hasta luego", "Aviso", MessageBoxButtons.OK);
                 this.Close();
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+          
         }
     }
 }

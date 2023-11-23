@@ -395,6 +395,38 @@ namespace BibliaMAD
 
             return add;
         }
+        public DataTable MostrarHistorialUsuarioActivo(string Correo)
+        {
+            DataTable datos = new DataTable();
+            var msg = "";
+            var add = false;
+            try
+            {
+                conectar();
+                string qry = "MostrarHistorialUsuarioActivo";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+
+                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.NVarChar, 100);
+                parametro1.Value = Correo;
+
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(datos);
+            }
+            catch (SqlException e)
+            {
+                add = false;
+                msg = "Excepción de base de datos: \n";
+                msg += e.Message;
+                MessageBox.Show(msg, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return datos;
+        }
 
     }
 }
