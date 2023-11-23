@@ -148,14 +148,14 @@
             this.Testamento.Location = new System.Drawing.Point(314, 146);
             this.Testamento.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Testamento.Name = "Testamento";
-            this.Testamento.Size = new System.Drawing.Size(140, 24);
+            this.Testamento.Size = new System.Drawing.Size(248, 24);
             this.Testamento.TabIndex = 17;
             // 
             // Version
             // 
             this.Version.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Version.FormattingEnabled = true;
-            this.Version.Location = new System.Drawing.Point(491, 98);
+            this.Version.Location = new System.Drawing.Point(555, 36);
             this.Version.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Version.Name = "Version";
             this.Version.Size = new System.Drawing.Size(140, 24);
@@ -173,7 +173,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(421, 101);
+            this.label6.Location = new System.Drawing.Point(485, 39);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 16);
             this.label6.TabIndex = 20;

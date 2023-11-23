@@ -46,6 +46,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(499, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // usuariosInactivosToolStripMenuItem
             // 
@@ -64,7 +65,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonShadow;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(14, 85);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(460, 351);
@@ -74,7 +75,7 @@
             // buttonr
             // 
             this.buttonr.Location = new System.Drawing.Point(175, 465);
-            this.buttonr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonr.Margin = new System.Windows.Forms.Padding(4);
             this.buttonr.Name = "buttonr";
             this.buttonr.Size = new System.Drawing.Size(138, 53);
             this.buttonr.TabIndex = 2;
@@ -91,7 +92,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Administrador";
             this.Text = "Administrador";
             this.Load += new System.EventHandler(this.Administrador_Load);

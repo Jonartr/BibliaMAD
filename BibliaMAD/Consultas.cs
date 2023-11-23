@@ -123,13 +123,14 @@ namespace BibliaMAD
 
             if (ok == 5) 
             {
-                bool searchResult = Variables_globales.conexion.BuscarPalabras(PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro,  Id_Capitulo);
+                bool searchResult = Variables_globales.conexion.BuscarPalabras(Variables_globales.usuario,PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro,  Id_Capitulo);
 
                 if (searchResult)
                 {
                     // Si la búsqueda tiene éxito, mostrar los resultados en el DataGridView
-                    Resultado.DataSource = Variables_globales.conexion.ResultadoBusqueda; ; // Ajusta según tu lógica y estructura de resultados
+       
                     MessageBox.Show("Búsqueda realizada correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Resultado.DataSource = Variables_globales.Consultas;
                 }
                 else
                 {
