@@ -194,5 +194,25 @@ namespace BibliaMAD
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(Resultado.SelectedRows.Count > 0){
+                DataGridViewRow fila =  Resultado.SelectedRows[0];
+
+                int NumeroVers = Convert.ToInt16(fila.Cells[3].Value.ToString());
+                string Texto = fila.Cells[4].Value.ToString();
+
+                bool ok = Variables_globales.conexion.AddFavorite(Variables_globales.usuario, NumeroVers, Texto);
+
+                if (ok)
+                {
+                    MessageBox.Show("Versiculo agregado correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+
+
+            }
+        }
     }
 }

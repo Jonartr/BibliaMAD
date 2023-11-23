@@ -357,9 +357,88 @@ namespace BibliaMAD
 
             return tabla;
         }
-		
-		// Ejemplo de método para ejecutar un SP que no se espera que regrese información, solo que ejecute
-		// ya sea un INSERT, UPDATE o DELETE
+
+        public bool AddFavorite(string Correo, int NumeroV, string Texto)
+        {
+            var msg = "";
+            var add = false;
+            try
+            {
+                conectar();
+                string qry = "Insertar_Favorito";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 50);
+                parametro1.Value = Correo;
+
+                var parametro2 = _comandosql.Parameters.Add("@NumeroVers", SqlDbType.Int);
+                parametro2.Value = NumeroV;
+
+                var parametro3 = _comandosql.Parameters.Add("@Texto", SqlDbType.Char, 255);
+                parametro3.Value = Texto;
+
+                _adaptador.InsertCommand = _comandosql;
+
+                _comandosql.ExecuteNonQuery();
+
+                add = true;
+            }
+            catch (SqlException e)
+            {
+                add = false;
+                msg = "Excepción de base de datos: \n";
+                msg += e.Message;
+                MessageBox.Show(msg, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return add;
+        }
+
+        public bool GetFavorite(string Correo)
+        {
+            var msg = "";
+            var add = false;
+            try
+            {
+                conectar();
+                string qry = "Trae_Favoritos";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 50);
+                parametro1.Value = Correo;
+
+
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(Variables_globales.Consultas);
+                _comandosql.ExecuteNonQuery();
+
+                add = true;
+            }
+            catch (SqlException e)
+            {
+                add = false;
+                msg = "Excepción de base de datos: \n";
+                msg += e.Message;
+                MessageBox.Show(msg, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return add;
+        }
+
+        // Ejemplo de método para ejecutar un SP que no se espera que regrese información, solo que ejecute
+        // ya sea un INSERT, UPDATE o DELETE
         public bool DeleteHistory(string Correo)
         {
             var msg = "";

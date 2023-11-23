@@ -130,6 +130,7 @@
             this.button2.TabIndex = 15;
             this.button2.Text = "Agregar a favoritos";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Idioma
             // 
@@ -220,6 +221,7 @@
             this.Controls.Add(this.Capitulo);
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Consultas";
             this.Text = "Consultas";

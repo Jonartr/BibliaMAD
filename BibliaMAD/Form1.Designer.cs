@@ -177,6 +177,7 @@
             this.Controls.Add(this.email);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Inicio_sesion";
             this.Text = "Inicio de sesion";
             this.Load += new System.EventHandler(this.Inicio_sesion_Load);
