@@ -80,7 +80,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(725, 154);
+            this.label4.Location = new System.Drawing.Point(698, 146);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(120, 16);
             this.label4.TabIndex = 9;
@@ -88,7 +88,7 @@
             // 
             // Palabras
             // 
-            this.Palabras.Location = new System.Drawing.Point(715, 207);
+            this.Palabras.Location = new System.Drawing.Point(688, 199);
             this.Palabras.Name = "Palabras";
             this.Palabras.Size = new System.Drawing.Size(147, 22);
             this.Palabras.TabIndex = 10;
@@ -98,7 +98,7 @@
             this.Resultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Resultado.Location = new System.Drawing.Point(21, 305);
             this.Resultado.Name = "Resultado";
-            this.Resultado.Size = new System.Drawing.Size(657, 237);
+            this.Resultado.Size = new System.Drawing.Size(900, 237);
             this.Resultado.TabIndex = 12;
             this.Resultado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -124,7 +124,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(728, 305);
+            this.button2.Location = new System.Drawing.Point(488, 262);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(134, 29);
             this.button2.TabIndex = 15;

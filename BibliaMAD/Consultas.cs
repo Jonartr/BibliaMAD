@@ -130,7 +130,9 @@ namespace BibliaMAD
                     // Si la búsqueda tiene éxito, mostrar los resultados en el DataGridView
        
                     MessageBox.Show("Búsqueda realizada correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Resultado.DataSource = null;
                     Resultado.DataSource = Variables_globales.Consultas;
+
                 }
                 else
                 {
