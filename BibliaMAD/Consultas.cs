@@ -12,6 +12,17 @@ namespace BibliaMAD
 {
     public partial class Consultas : Form
     {
+
+
+        int Id_Idioma = 0;
+        int Id_Testamento = 0;
+        int Id_Version = 0;
+        int Id_Libro = 0;
+        int Id_Capitulo = 0;
+        string PalabraBuscada = "";
+
+
+        bool filtro = false;
         public Consultas()
         {
             InitializeComponent();
@@ -39,99 +50,33 @@ namespace BibliaMAD
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int ok = 0; // Contador para validar si todo está correcto
-
-
-            int Id_Idioma = 0;
-            int Id_Testamento = 0;
-            int Id_Version = 0;
-            int Id_Libro = 0;
-            int Id_Capitulo = 0;
-
-            var PalabraBuscada = Palabras.Text;
-            var TextIdioma = Idioma.Text;
-            var TextTestamento = Testamento.Text;
-            var TextVersion = Version.Text; 
-            var TextLibro = Libro.Text;
-            Id_Capitulo = Convert.ToInt16(Capitulo.Text);
+        
 
 
 
-
-            if (TextIdioma.Equals("Español"))
+            if (!filtro)
             {
-                Id_Idioma = 1;
-                ok++;
-            }
-            else
-            {
-                MessageBox.Show("Seleccione un idioma", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-
-            if (TextTestamento.Equals("ANTIGUO TESTAMENTO"))
-            {
-                Id_Testamento = 1;
-                ok++;
-            }
-            else
-            {
-                MessageBox.Show("Seleccione un testamento", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-
-            if (TextVersion.Equals("REINA VALERA 1960"))
-            {
-                Id_Version = 1; 
-                ok++;
-            }
-            else
-            {
-                MessageBox.Show("Seleccione una versión", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-
-            if (TextLibro.Equals("Génesis"))
-            {
-                Id_Libro = 1;
-                ok++;
-            }
-            else
-            {
-                MessageBox.Show("Seleccione una versión", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-
-            //if (Id_Libro > 0) 
-            //{
-            //    ok++;
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Seleccione un libro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
-            if (Id_Capitulo != 0)
-            {
-                ok++;
-            }
-            else
-            {
-                MessageBox.Show("Seleccione un Capitulo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-
-
-            if (ok == 5) 
-            {
-                bool searchResult = Variables_globales.conexion.BuscarPalabras(Variables_globales.usuario,PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro,  Id_Capitulo);
+                PalabraBuscada = Palabras.Text;
+                Variables_globales.Consultas = null;
+                bool searchResult = Variables_globales.conexion.BuscarPalabras(1, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro, Id_Capitulo);
 
                 if (searchResult)
                 {
                     // Si la búsqueda tiene éxito, mostrar los resultados en el DataGridView
-       
-                    MessageBox.Show("Búsqueda realizada correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     Resultado.DataSource = null;
-                    Resultado.DataSource = Variables_globales.Consultas;
+                    if(Variables_globales.Consultas.Rows.Count > 0)
+                    {
+                        MessageBox.Show("Búsqueda realizada correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        Resultado.DataSource = Variables_globales.Consultas;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron resultados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+
 
                 }
                 else
@@ -139,6 +84,43 @@ namespace BibliaMAD
                     MessageBox.Show("No se encontraron resultados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+            else
+            {
+                try
+                {
+                    bool searchResult = Variables_globales.conexion.BuscarPalabras(2, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro, Id_Capitulo);
+
+                    if (searchResult)
+                    {
+                        // Si la búsqueda tiene éxito, mostrar los resultados en el DataGridView
+
+                        MessageBox.Show("Búsqueda realizada correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Resultado.DataSource = null;
+                        Resultado.DataSource = Variables_globales.Consultas;
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron resultados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+
+
+                }
+                catch (System.FormatException ex)
+                {
+                    MessageBox.Show("Llene todos los campos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+
+
+
+            }
+        
+           
+
+
+         
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -148,52 +130,23 @@ namespace BibliaMAD
 
         private void Consultas_Load(object sender, EventArgs e)
         {
-            Variables_globales.conexion.Get_Books();
-            /*
-                      
-                   Id_Idioma = (int)Idioma.SelectedValue;
-                   Id_Testamento = (int)Testamento.SelectedValue;
-                   Id_Version = (int)Version.SelectedValue;
-                   Id_Libro = (int)Libro.SelectedValue;
-                   Id_Capitulo = (int)Capitulo.SelectedValue;*/
-            foreach (DataRow row in Variables_globales.Consultas.Rows)
-            {
+         Variables_globales.Consultas =  Variables_globales.conexion.Get_Books();
+
+
+                foreach (DataRow row in Variables_globales.Consultas.Rows)
+                {
               
-                if (!Idioma.Items.Contains(row["NombreIdioma"]))
-                {
-                    Idioma.Items.Add(row["NombreIdioma"].ToString());
+                    if (!Idioma.Items.Contains(row["Nombre"])) {
+                        Idioma.Items.Add(row["Nombre"].ToString());
+                    }
+            
+
                 }
-
-              
-                if (!Libro.Items.Contains(row["NombreLibro"]))
-                {
-                    Libro.Items.Add(row["NombreLibro"].ToString());
-                }
-
-                if (!Version.Items.Contains(row["NombreVersion"]))
-                {
-                    Version.Items.Add(row["NombreVersion"].ToString());
-                }
-
-                if (!Capitulo.Items.Contains(row["NumeroCap"]))
-                {
-                    Capitulo.Items.Add(row["NumeroCap"].ToString());
-                }
-
-                if (!Testamento.Items.Contains(row["NombreTestamento"]))
-                {
-                    Testamento.Items.Add(row["NombreTestamento"].ToString());
-                }
-
-            }
-
+            radioButton1.Checked = true;
 
         }
 
-        private void Capitulo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -214,5 +167,144 @@ namespace BibliaMAD
 
             }
         }
+
+        private void Idioma_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Id_Idioma = Convert.ToInt16(Idioma.SelectedIndex) + 1;
+            DataTable tVersion;
+            DataTable tTestamento;
+            try
+            {
+                tVersion = Variables_globales.conexion.Filtro_version(Id_Idioma);
+                tTestamento = Variables_globales.conexion.Filtro_Testamento(Id_Idioma);
+                Version.Items.Clear();
+                Testamento.Items.Clear();
+                Libro.Items.Clear();
+                Capitulo.Items.Clear();
+                Libro.Enabled = false;
+                Capitulo.Enabled = false;
+                foreach (DataRow row in tVersion.Rows)
+                {
+
+                    if (!Version.Items.Contains(row["Nombre"]))
+                    {
+                        Version.Items.Add(row["Nombre"].ToString());
+                    }
+
+
+                }
+                foreach (DataRow row in tTestamento.Rows)
+                {
+
+                    if (!Testamento.Items.Contains(row["Nombre"]))
+                    {
+                        Testamento.Items.Add(row["Nombre"].ToString());
+                    }
+
+
+                }
+
+                Version.Enabled = true;
+                Testamento.Enabled = true;
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en el filtro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+
+        }
+
+        private void Testamento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Id_Testamento = Convert.ToInt16(Testamento.SelectedIndex) + 1;
+        }
+
+
+
+        private void Version_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Id_Version = Convert.ToInt16(Version.SelectedIndex) + 1;
+            DataTable tLibros;
+          
+        if(Id_Testamento != 0 && Id_Version != 0)
+            {
+                try
+                {
+                    tLibros = Variables_globales.conexion.Filtro_Libros(Id_Idioma, Id_Testamento);
+                    Libro.Items.Clear();
+                    foreach (DataRow row in tLibros.Rows)
+                    {
+
+                        if (!Libro.Items.Contains(row["Nombre"]))
+                        {
+                            Libro.Items.Add(row["No. Libro"].ToString() + " " + row["Nombre"].ToString());
+                        }
+
+
+                    }
+                    Libro.Enabled = true;
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error en el filtro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+            }
+          
+        }
+
+        private void Libro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idlibro = Convert.ToInt16(Libro.Text.Substring(0, 2));
+            Id_Libro = idlibro;
+
+            DataTable tCaps;
+
+
+            try
+            {
+                tCaps = Variables_globales.conexion.Filtro_Capitulos(idlibro);
+                Capitulo.Items.Clear();
+                foreach (DataRow row in tCaps.Rows)
+                {
+
+                    if (!Capitulo.Items.Contains(row["Capitulo"]))
+                    {
+                        Capitulo.Items.Add( row["Capitulo"].ToString());
+                    }
+
+
+                }
+                Capitulo.Enabled = true;
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en el filtro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+        }
+
+        private void Capitulo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          Id_Capitulo = Convert.ToInt16(Capitulo.Text);        
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox1.Enabled = false;
+            filtro = false;
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox1.Enabled = true;
+            filtro = true;
+        }
+
+      
     }
 }

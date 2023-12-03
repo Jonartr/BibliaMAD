@@ -181,7 +181,7 @@ namespace BibliaMAD
             get { return _resultadoBusqueda; }
         }
 
-        public bool BuscarPalabras( string Correo, string PalabraBuscada = "", int Id_Idioma = 0,
+        public bool BuscarPalabras(int Opcion = 0, string Correo = "", string PalabraBuscada = "", int Id_Idioma = 0,
             int Id_Testamento = 0, int Id_Version = 0, int Id_Libro = 0, int Id_Capitulo = 0)
         {
             bool search_ok = false;
@@ -192,6 +192,9 @@ namespace BibliaMAD
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 9000;
+
+                var Opcionsql = _comandosql.Parameters.Add("@Opcion", SqlDbType.NVarChar, 100);
+                Opcionsql.Value = Opcion;
 
                 var PalabraParam = _comandosql.Parameters.Add("@PalabraBuscada", SqlDbType.NVarChar, 100);
                 PalabraParam.Value = PalabraBuscada;
@@ -321,12 +324,6 @@ namespace BibliaMAD
             return tabla;
         }
 
- 
-
-
-
-        // Ejemplo de método para recibir una consulta en forma de tabla
-        // Cuando el SP ejecutará un SELECT
         public DataTable Get_Books()
         {
             var msg = "";
@@ -341,7 +338,6 @@ namespace BibliaMAD
                 _adaptador.SelectCommand = _comandosql;
                 _adaptador.Fill(tabla);
 
-                Variables_globales.Consultas = tabla;
 
             }
             catch (SqlException e)
@@ -357,6 +353,159 @@ namespace BibliaMAD
 
             return tabla;
         }
+
+
+        public DataTable Filtro_Testamento(int Idioma)
+        {
+
+            DataTable tabla = new DataTable();
+            try
+            {
+                conectar();
+                string qry = "Filtrado_Testamento";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+
+                var Languaje = _comandosql.Parameters.Add("@Idioma", SqlDbType.Int);
+                Languaje.Value = Idioma;
+
+
+
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(tabla);
+
+
+            }
+            catch (SqlException e)
+            {
+
+
+                MessageBox.Show(e.Message, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return tabla;
+        }
+
+
+        public DataTable Filtro_version(int Idioma)
+        {
+
+            DataTable tabla = new DataTable();
+            try
+            {
+                conectar();
+                string qry = "Filtrado_Version";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+
+                var Languaje = _comandosql.Parameters.Add("@Idioma", SqlDbType.Int);
+                Languaje.Value = Idioma;
+
+
+
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(tabla);
+
+
+            }
+            catch (SqlException e)
+            {
+       
+
+                MessageBox.Show(e.Message, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return tabla;
+        }
+
+        public DataTable Filtro_Libros(int Idioma, int Testamento)
+        {
+
+            DataTable tabla = new DataTable();
+            try
+            {
+                conectar();
+                string qry = "Filtrado_Libro";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+
+                var Languaje = _comandosql.Parameters.Add("@Idioma", SqlDbType.Int);
+                Languaje.Value = Idioma;
+
+                var Ver = _comandosql.Parameters.Add("@Testamento", SqlDbType.Int);
+                Ver.Value = Testamento;
+
+
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(tabla);
+
+
+            }
+            catch (SqlException e)
+            {
+
+
+                MessageBox.Show(e.Message, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return tabla;
+        }
+
+        public DataTable Filtro_Capitulos(int Libro)
+        {
+
+            DataTable tabla = new DataTable();
+            try
+            {
+                conectar();
+                string qry = "Filtrado_Capitulo";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+
+                var Caps = _comandosql.Parameters.Add("@Libro", SqlDbType.Int);
+                Caps.Value = Libro;
+
+
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(tabla);
+
+
+            }
+            catch (SqlException e)
+            {
+
+
+                MessageBox.Show(e.Message, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return tabla;
+        }
+
+
 
         public bool AddFavorite(string Correo, int NumeroV, string Texto)
         {
