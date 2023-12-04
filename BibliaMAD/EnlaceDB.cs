@@ -226,7 +226,13 @@ namespace BibliaMAD
                 if(_resultadoBusqueda.Rows.Count > 0){
                     Variables_globales.Consultas = _resultadoBusqueda;
                 }
-              
+                else{
+                    Variables_globales.Consultas = null;
+                    MessageBox.Show("No se encontraron resultados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+
+
 
                 search_ok = true;
             }
@@ -631,7 +637,7 @@ namespace BibliaMAD
             try
             {
                 conectar();
-                string qry = "MostrarHistorialUsuarioActivo";
+                string qry = "TraeHistorial";
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
 
@@ -640,6 +646,7 @@ namespace BibliaMAD
 
                 _adaptador.SelectCommand = _comandosql;
                 _adaptador.Fill(datos);
+
             }
             catch (SqlException e)
             {
@@ -654,6 +661,64 @@ namespace BibliaMAD
             }
 
             return datos;
+        }
+
+        public bool AddHistory(string Correo,string idioma = "", string Palabra = "", string Testamento = "",
+            string Libro = "", string Version = "" , int Capitulo = 0, int Opcion = 1)
+        {
+            var msg = "";
+            var add = false;
+            try
+            {
+                conectar();
+                string qry = "SP_Historial";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+                var Email = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 50);
+                Email.Value = Correo;
+
+                var Iidioma = _comandosql.Parameters.Add("@Idioma", SqlDbType.Char, 50);
+                Iidioma.Value = idioma;
+
+                var Palabraa = _comandosql.Parameters.Add("@PalabraBuscada", SqlDbType.Char, 50);
+                Palabraa.Value = Palabra;
+
+                var Test = _comandosql.Parameters.Add("@Testamento", SqlDbType.Char, 50);
+                Test.Value = Testamento;
+
+                var Librroo = _comandosql.Parameters.Add("@Libro", SqlDbType.Char, 50);
+                Librroo.Value = Libro;
+
+                var Vers = _comandosql.Parameters.Add("@Version", SqlDbType.Char, 50);
+                Vers.Value = Version;
+
+                var Cap = _comandosql.Parameters.Add("@Capitulo", SqlDbType.Int);
+                Cap.Value = Capitulo;
+
+                var parametro1 = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int);
+                parametro1.Value = Opcion;
+
+                _adaptador.InsertCommand = _comandosql;
+
+                _comandosql.ExecuteNonQuery();
+
+                add = true;
+            }
+            catch (SqlException e)
+            {
+                add = false;
+                msg = "Excepción de base de datos: \n";
+                msg += e.Message;
+                MessageBox.Show(msg, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return add;
         }
 
     }

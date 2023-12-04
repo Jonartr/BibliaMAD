@@ -50,15 +50,15 @@ namespace BibliaMAD
 
         private void button1_Click(object sender, EventArgs e)
         {
-        
 
-
+          
 
             if (!filtro)
             {
                 PalabraBuscada = Palabras.Text;
                 Variables_globales.Consultas = null;
                 bool searchResult = Variables_globales.conexion.BuscarPalabras(1, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro, Id_Capitulo);
+
 
                 if (searchResult)
                 {
@@ -88,8 +88,16 @@ namespace BibliaMAD
             {
                 try
                 {
-                    bool searchResult = Variables_globales.conexion.BuscarPalabras(2, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro, Id_Capitulo);
+                    var Idiomatext = Idioma.Text;
+                    var Testamentotext = Testamento.Text;
+                    var Versiontext = Version.Text;
+                    var Librotext = Libro.Text;
+                    var Capitulotext = Convert.ToInt16(Capitulo.Text);
 
+                    PalabraBuscada = Palabras.Text;
+                    bool searchResult = Variables_globales.conexion.BuscarPalabras(2, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro, Id_Capitulo);
+                    Variables_globales.conexion.AddHistory(Variables_globales.usuario, Idiomatext, PalabraBuscada, Testamentotext,
+                     Librotext, Versiontext, Capitulotext);
                     if (searchResult)
                     {
                         // Si la búsqueda tiene éxito, mostrar los resultados en el DataGridView
@@ -183,29 +191,41 @@ namespace BibliaMAD
                 Capitulo.Items.Clear();
                 Libro.Enabled = false;
                 Capitulo.Enabled = false;
-                foreach (DataRow row in tVersion.Rows)
+                if(tVersion.Rows.Count >0|| tTestamento.Rows.Count > 0)
                 {
-
-                    if (!Version.Items.Contains(row["Nombre"]))
+                    foreach (DataRow row in tVersion.Rows)
                     {
-                        Version.Items.Add(row["Nombre"].ToString());
+
+                        if (!Version.Items.Contains(row["Nombre"]))
+                        {
+                            Version.Items.Add(row["Nombre"].ToString());
+                        }
+
+
+                    }
+                    foreach (DataRow row in tTestamento.Rows)
+                    {
+
+                        if (!Testamento.Items.Contains(row["Nombre"]))
+                        {
+                            Testamento.Items.Add(row["Nombre"].ToString());
+                        }
+
+
                     }
 
-
+                    Version.Enabled = true;
+                    Testamento.Enabled = true;
                 }
-                foreach (DataRow row in tTestamento.Rows)
+                else
                 {
-
-                    if (!Testamento.Items.Contains(row["Nombre"]))
-                    {
-                        Testamento.Items.Add(row["Nombre"].ToString());
-                    }
-
-
+                    MessageBox.Show("No se encontraron resultados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Version.Enabled = false;
+                    Testamento.Enabled = false;
                 }
 
-                Version.Enabled = true;
-                Testamento.Enabled = true;
+
+
             }
 
             catch (Exception ex)
@@ -262,7 +282,6 @@ namespace BibliaMAD
             Id_Libro = idlibro;
 
             DataTable tCaps;
-
 
             try
             {
