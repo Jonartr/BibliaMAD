@@ -592,6 +592,43 @@ namespace BibliaMAD
             return add;
         }
 
+        public bool GetFavorito(string Correo)
+        {
+            var msg = "";
+            var add = false;
+            try
+            {
+                conectar();
+                string qry = "Favorito_azar";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 50);
+                parametro1.Value = Correo;
+
+
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(Variables_globales.Consultas);
+                _comandosql.ExecuteNonQuery();
+
+                add = true;
+            }
+            catch (SqlException e)
+            {
+                add = false;
+                msg = "Excepción de base de datos: \n";
+                msg += e.Message;
+                MessageBox.Show(msg, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return add;
+        }
+
         // Ejemplo de método para ejecutar un SP que no se espera que regrese información, solo que ejecute
         // ya sea un INSERT, UPDATE o DELETE
         public bool DeleteHistory(string Correo)

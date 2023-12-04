@@ -82,5 +82,30 @@ namespace BibliaMAD
         {
 
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void Favorito_Load(object sender, EventArgs e)
+        {
+            Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = Variables_globales.Consultas;
+        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            bool ok = Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
