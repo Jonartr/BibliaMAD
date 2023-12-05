@@ -58,6 +58,8 @@ namespace BibliaMAD
                 PalabraBuscada = Palabras.Text;
                 Variables_globales.Consultas = null;
                 bool searchResult = Variables_globales.conexion.BuscarPalabras(1, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro, Id_Capitulo);
+                Variables_globales.conexion.AddHistory(Variables_globales.usuario, "Todos", PalabraBuscada, "Todos",
+                     "Todos", "Todos", 0);
 
 
                 if (searchResult)
@@ -65,17 +67,11 @@ namespace BibliaMAD
                     // Si la búsqueda tiene éxito, mostrar los resultados en el DataGridView
 
                     Resultado.DataSource = null;
-                    if(Variables_globales.Consultas.Rows.Count > 0)
-                    {
+               
                         MessageBox.Show("Búsqueda realizada correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         Resultado.DataSource = Variables_globales.Consultas;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontraron resultados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    }
+             
 
 
                 }
@@ -124,11 +120,19 @@ namespace BibliaMAD
 
 
             }
-        
-           
+            Idioma.Text = "";
+            Version.Items.Clear();
+            Testamento.Items.Clear();
+            Libro.Items.Clear();
+            Capitulo.Items.Clear();
+
+            Testamento.Enabled =false;
+            Version.Enabled = false;
+            Libro.Enabled = false;
+            Capitulo.Enabled = false;
 
 
-         
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -158,13 +162,11 @@ namespace BibliaMAD
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(Resultado.SelectedRows.Count > 0){
-                DataGridViewRow fila =  Resultado.SelectedRows[0];
 
-                int NumeroVers = Convert.ToInt16(fila.Cells[3].Value.ToString());
-                string Texto = fila.Cells[4].Value.ToString();
-
-                bool ok = Variables_globales.conexion.AddFavorite(Variables_globales.usuario, NumeroVers, Texto);
+                int rowindex = Resultado.CurrentCell.RowIndex;
+                var Numerovers = Convert.ToInt16(Resultado.Rows[rowindex].Cells[4].Value.ToString());
+                var Texto = (Resultado.Rows[rowindex].Cells[5].Value.ToString()); 
+                bool ok = Variables_globales.conexion.AddFavorite(Variables_globales.usuario, Numerovers, Texto);
 
                 if (ok)
                 {
@@ -173,7 +175,7 @@ namespace BibliaMAD
                 }
 
 
-            }
+            
         }
 
         private void Idioma_SelectedIndexChanged(object sender, EventArgs e)
@@ -324,6 +326,9 @@ namespace BibliaMAD
             filtro = true;
         }
 
-      
+        private void Consultas_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Variables_globales.consulta.Close();
+        }
     }
 }

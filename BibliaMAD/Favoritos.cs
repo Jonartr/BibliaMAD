@@ -45,6 +45,8 @@ namespace BibliaMAD
 
             if(delete == DialogResult.Yes)
             {
+                Variables_globales.conexion.DeleteFavorite(Variables_globales.usuario, 1);
+                MessageBox.Show("Favorito borrado con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
         }
@@ -56,8 +58,15 @@ namespace BibliaMAD
 
             if (delete == DialogResult.Yes)
             {
+                Variables_globales.conexion.DeleteFavorite(Variables_globales.usuario, 2, idFav);
+                MessageBox.Show("Favoritos borrados con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
+        }
+
+        private void Favoritos_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Variables_globales.favorito.Close();
         }
     }
 }

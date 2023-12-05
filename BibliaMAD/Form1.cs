@@ -54,8 +54,10 @@ namespace BibliaMAD
               {
                     if (Variables_globales.estatus == 1)
                     {
-                            var perfil = new Pagina_principal();
+                        //   var perfil = new Pagina_principal();
+                            this.Hide();
                             Variables_globales.inicio.ShowDialog();
+                        
                     }
                     else
                     {
@@ -121,6 +123,11 @@ namespace BibliaMAD
         private void label5_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Inicio_sesion_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Variables_globales.isesion.Close();
         }
     }
 }

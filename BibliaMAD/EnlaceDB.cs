@@ -766,7 +766,7 @@ namespace BibliaMAD
         }
 
         public bool AddHistory(string Correo,string idioma = "", string Palabra = "", string Testamento = "",
-            string Libro = "", string Version = "" , int Capitulo = 0, int Opcion = 1)
+            string Libro = "", string Version = "" , int Capitulo = 0)
         {
             var msg = "";
             var add = false;
@@ -799,8 +799,6 @@ namespace BibliaMAD
                 var Cap = _comandosql.Parameters.Add("@Capitulo", SqlDbType.Int);
                 Cap.Value = Capitulo;
 
-                var parametro1 = _comandosql.Parameters.Add("@Opcion", SqlDbType.Int);
-                parametro1.Value = Opcion;
 
                 _adaptador.InsertCommand = _comandosql;
 

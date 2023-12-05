@@ -275,6 +275,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Consultas";
             this.Text = "Consultas";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Consultas_FormClosed);
             this.Load += new System.EventHandler(this.Consultas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Resultado)).EndInit();
             this.groupBox1.ResumeLayout(false);

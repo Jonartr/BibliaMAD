@@ -125,5 +125,10 @@ namespace BibliaMAD
         {
 
         }
+
+        private void Pagina_principal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Variables_globales.isesion.Show();
+        }
     }
 }
