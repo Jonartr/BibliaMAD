@@ -16,6 +16,8 @@ namespace BibliaMAD
             public static int estatus { get; set; }
             public static int intentos { get; set; }
 
+            public static string versiculo { get; set; }
+
             //QUERYS 
             public static DataTable Consultas { get; set; } = new DataTable();
 

@@ -36,6 +36,7 @@ namespace BibliaMAD
         static private SqlCommand _comandosql = new SqlCommand();
         static private DataTable _tabla = new DataTable();
         static private DataSet _DS = new DataSet();
+        static private bool _inited = false;
 
         public DataTable obtenertabla
         {
@@ -592,14 +593,15 @@ namespace BibliaMAD
             return add;
         }
 
-        public bool GetFavorito(string Correo)
+        public string GetFavorito(string Correo)
         {
             var msg = "";
             var add = false;
+            string ver = "";
             try
             {
                 conectar();
-                string qry = "Favorito_azar";
+                string qry = "FavoritoAzar";
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 1200;
@@ -608,9 +610,23 @@ namespace BibliaMAD
                 parametro1.Value = Correo;
 
 
+                SqlParameter Outsql = new SqlParameter();
+                Outsql.ParameterName = "@Versiculo";
+                Outsql.SqlDbType = SqlDbType.NVarChar;  
+                Outsql.Direction = ParameterDirection.Output;
+                Outsql.Size = -1;
+                _comandosql.Parameters.Add(Outsql);
+
+                
+
                 _adaptador.SelectCommand = _comandosql;
-                _adaptador.Fill(Variables_globales.Consultas);
                 _comandosql.ExecuteNonQuery();
+
+                ver = Outsql.Value.ToString();
+
+                //   _adaptador.Fill(Variables_globales.Consultas);
+
+
 
                 add = true;
             }
@@ -626,7 +642,7 @@ namespace BibliaMAD
                 desconectar();
             }
 
-            return add;
+            return ver;
         }
 
         // Ejemplo de método para ejecutar un SP que no se espera que regrese información, solo que ejecute

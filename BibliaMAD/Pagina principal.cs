@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Speech.Synthesis;
 
 namespace BibliaMAD
 {
@@ -80,7 +80,16 @@ namespace BibliaMAD
 
         private void Pagina_principal_Load(object sender, EventArgs e)
         {
-
+            label2.Text = Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
+            label2.MaximumSize = new Size(300,0);
+            label2.AutoSize = true;
+            SpeechSynthesizer audio = new SpeechSynthesizer();
+            if (!string.IsNullOrEmpty(label2.Text))
+            {
+                audio.SpeakAsyncCancelAll();
+                audio.SpeakAsync(label2.Text);
+            }
+         
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -89,9 +98,7 @@ namespace BibliaMAD
         }
         private void Favorito_Load(object sender, EventArgs e)
         {
-            Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = Variables_globales.Consultas;
+         
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -100,10 +107,21 @@ namespace BibliaMAD
 
         private void button4_Click(object sender, EventArgs e)
         {
-            bool ok = Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
+            label2.Text = Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
+            SpeechSynthesizer audio = new SpeechSynthesizer();
+            if (!string.IsNullOrEmpty(label2.Text))
+            {
+                audio.SpeakAsyncCancelAll();
+                audio.SpeakAsync(label2.Text);
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
         {
 
         }
