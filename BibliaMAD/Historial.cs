@@ -12,6 +12,8 @@ namespace BibliaMAD
 {
     public partial class Historial : Form
     {
+
+        int idHistorial = 0;
         public Historial()
         {
             InitializeComponent();
@@ -28,7 +30,20 @@ namespace BibliaMAD
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var Borrar_completo = MessageBox.Show("¿Esta seguro de borrar esta busqueda?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Borrar_completo == DialogResult.Yes)
+            {
+                bool ok = Variables_globales.conexion.DeleteHistory(Variables_globales.usuario, 1, idHistorial);
 
+                if (ok)
+                {
+                    MessageBox.Show("Busqueda borrada con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView1.DataSource = null;
+                    DataTable datos = Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
+                    dataGridView1.DataSource = datos;
+                }
+
+            }
         }
 
         private void BorrarHistorial_Click(object sender, EventArgs e)
@@ -36,15 +51,30 @@ namespace BibliaMAD
             var Borrar_completo = MessageBox.Show("¿Esta seguro de borrar su historial", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Borrar_completo == DialogResult.Yes)
             {
-              
-                MessageBox.Show("Cuenta Deshabilitada,\ncontacte a un adminstrador en caso" +
-                    " de querer reingresar, hasta luego", "Aviso", MessageBoxButtons.OK);
+               bool ok = Variables_globales.conexion.DeleteHistory(Variables_globales.usuario, 1);
+
+                if (ok)
+                {
+                    MessageBox.Show("Historial borrado con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView1.DataSource = null;
+                    DataTable datos = Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
+                    dataGridView1.DataSource = datos;
+                }
+                
             }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-          
+            int rowindex = dataGridView1.CurrentCell.RowIndex;
+
+             idHistorial = Convert.ToInt16(dataGridView1.Rows[rowindex].Cells[0].Value.ToString());
+            label2.Text = "Indice seleccionado: " + idHistorial.ToString();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

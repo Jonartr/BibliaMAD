@@ -12,6 +12,7 @@ namespace BibliaMAD
 {
     public partial class Favoritos : Form
     {
+        int idFav = 0;
         public Favoritos()
         {
             InitializeComponent();
@@ -27,6 +28,36 @@ namespace BibliaMAD
             Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = Variables_globales.Consultas;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowindex = dataGridView1.CurrentCell.RowIndex;
+
+            idFav = Convert.ToInt16(dataGridView1.Rows[rowindex].Cells[0].Value.ToString());
+            label2.Text = "Indice seleccionado: " + idFav.ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        var delete =  MessageBox.Show("¿Desea borrar todos sus favoritos?"
+                + "\nEsta accion no se podra deshacer","Aviso" ,MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if(delete == DialogResult.Yes)
+            {
+
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var delete = MessageBox.Show("¿Desea borrar este favorito?"
+              + "\nEsta accion no se podra deshacer", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (delete == DialogResult.Yes)
+            {
+
+            }
         }
     }
 }

@@ -63,6 +63,26 @@ namespace BibliaMAD.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap paper {
+            get {
+                object obj = ResourceManager.GetObject("paper", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap paper_bible {
+            get {
+                object obj = ResourceManager.GetObject("paper bible", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap png_transparent_icon_design_bible_religion_christianity_orange_symbol_logo_thumbnail {
             get {
                 object obj = ResourceManager.GetObject("png-transparent-icon-design-bible-religion-christianity-orange-symbol-logo-thumbn" +

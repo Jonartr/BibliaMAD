@@ -160,5 +160,11 @@
   <ItemGroup>
     <None Include="png-transparent-icon-design-bible-religion-christianity-orange-symbol-logo-thumbnail.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="paper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="paper bible.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

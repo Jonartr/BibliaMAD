@@ -157,6 +157,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Image = global::BibliaMAD.Properties.Resources.paper_bible;
             this.label2.Location = new System.Drawing.Point(62, 180);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 16);

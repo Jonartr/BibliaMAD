@@ -32,14 +32,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BorrarBusqueda = new System.Windows.Forms.Button();
             this.BorrarHistorial = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 101);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 123);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(645, 323);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -74,11 +76,22 @@
             this.BorrarHistorial.UseVisualStyleBackColor = true;
             this.BorrarHistorial.Click += new System.EventHandler(this.BorrarHistorial_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 95);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(115, 16);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Indice seleccionado:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
             // Historial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(701, 509);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.BorrarHistorial);
             this.Controls.Add(this.BorrarBusqueda);
             this.Controls.Add(this.label1);
@@ -101,5 +114,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BorrarBusqueda;
         private System.Windows.Forms.Button BorrarHistorial;
+        private System.Windows.Forms.Label label2;
     }
 }
