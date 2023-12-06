@@ -12,8 +12,9 @@ namespace BibliaMAD
 {
     public partial class Ayuda : Form
     {
-        DataTable Estatus;
+     
         int Estado = 0;
+        bool ok = false;
         public Ayuda()
         {
             InitializeComponent();
@@ -28,16 +29,23 @@ namespace BibliaMAD
         {
             var Correo = textBox1.Text;
 
-            bool ok = Variables_globales.conexion.Insert_Users(4, Correo);
-
-
             try
             {
-
-                 Estatus = Variables_globales.conexion.EstatusUsuario(Correo);
-                if(Estatus.Rows.Count > 0)
+               Variables_globales.conexion.EstatusUsuario(Correo);
+                if(Variables_globales.Consultas.Rows.Count > 0)
                 {
-                    Estado = Convert.ToInt16(Estatus.Rows[0]["Estatus"]);
+                     Estado = Convert.ToInt16(Variables_globales.Consultas.Rows[0]["Rehabilitado"]);
+                    if (ok && Estado == 0)
+                    {
+                        ok = Variables_globales.conexion.Insert_Users(4, Correo);
+                        MessageBox.Show("Peticion enviada, espere respuesta de administrador", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cuenta activa no requiere rehabilitacion", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                 
                 }
                 
             }
@@ -48,15 +56,7 @@ namespace BibliaMAD
             }
 
 
-            if (ok && Estado == 0)
-            {
-                MessageBox.Show("Peticion enviada, espere respuesta de administrador", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                MessageBox.Show("Cuenta activa no requiere rehabilitacion", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-            }
+      
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -68,25 +68,39 @@ namespace BibliaMAD
         private void button2_Click(object sender, EventArgs e)
         {
             var Usuario = textBox1.Text;
-
-            DataTable Estatus = Variables_globales.conexion.EstatusUsuario(Usuario);
-            var Estado = Convert.ToInt16(Estatus.Rows[0]["Rehabilitado"]);
-            var Estado2 = Convert.ToInt16(Estatus.Rows[0]["Estatus"]);
-            if (Estado == 1 && Estado2 == 0)
+            try
             {
-                MessageBox.Show("Rehabilitacion valida\nRegrse a inicio de sesion" +
-                    "para recibir contraseña temporal", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+              Variables_globales.conexion.EstatusUsuario(Usuario);
+                if (Variables_globales.Consultas.Rows.Count > 0)
+                {
+                    var Estado = Convert.ToInt16(Variables_globales.Consultas.Rows[0]["Rehabilitado"]);
+                    var Estado2 = Convert.ToInt16(Variables_globales.Consultas.Rows[0]["Estatus"]);
+                    if (Estado == 1 && Estado2 == 0)
+                    {
+                        MessageBox.Show("Rehabilitacion valida\nRegrse a inicio de sesion" +
+                            "para recibir contraseña temporal", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+
+                    }
+                    else if (Estado2 == 1)
+                    {
+                        MessageBox.Show("Cuenta activa no necesita rehabilitacion", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Rehabilitacion en proceso, por favor siga en espera", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                }
+            
+            }
+            
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
-            else if (Estado == 0 && Estado2 == 1 )
-            {
-                MessageBox.Show("Cuneta activa no necesita rehabilitacion", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Rehabilitacion en proceso, por favor siga en espera" , "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+
         }
     }
 }

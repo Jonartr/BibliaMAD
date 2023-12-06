@@ -20,7 +20,13 @@ namespace BibliaMAD
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("¿Desea rehabilitarlo?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            var ok = MessageBox.Show("¿Desea rehabilitarlo?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (ok == DialogResult.Yes)
+            {
+                int rowindex = dataGridView1.CurrentCell.RowIndex;
+                var Correo = dataGridView1.Rows[rowindex].Cells[0].Value.ToString();
+                Variables_globales.conexion.Insert_Users(5, Correo);
+            }
         }
 
         private void Administrador_Load(object sender, EventArgs e)

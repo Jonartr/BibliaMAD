@@ -131,13 +131,13 @@ namespace BibliaMAD
                 string qry = "Rehabilitado";
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
-                _comandosql.CommandTimeout = 9000;
+                _comandosql.CommandTimeout = 1200;
 
-                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 50);
+                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 100);
                 parametro1.Value = Correo; 
 
                 _adaptador.SelectCommand = _comandosql;
-                _adaptador.Fill(_tabla);
+                _adaptador.Fill(Variables_globales.Consultas);
 
               
 
