@@ -12,6 +12,7 @@ namespace BibliaMAD
 {
     public partial class Administrador : Form
     {
+        int idU = 0;
         public Administrador()
         {
             InitializeComponent();
@@ -30,10 +31,18 @@ namespace BibliaMAD
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            int rowindex = dataGridView1.CurrentCell.RowIndex;
 
+          
+            label1.Text = "Indice seleccionado: " + (rowindex + 1).ToString();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

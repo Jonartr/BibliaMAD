@@ -20,6 +20,7 @@ namespace BibliaMAD
         int Id_Libro = 0;
         int Id_Capitulo = 0;
         string PalabraBuscada = "";
+        int Versi = 0;
 
 
         bool filtro = false;
@@ -51,15 +52,16 @@ namespace BibliaMAD
         private void button1_Click(object sender, EventArgs e)
         {
 
-          
+
 
             if (!filtro)
             {
                 PalabraBuscada = Palabras.Text;
+            
                 Variables_globales.Consultas = null;
                 bool searchResult = Variables_globales.conexion.BuscarPalabras(1, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro, Id_Capitulo);
                 Variables_globales.conexion.AddHistory(Variables_globales.usuario, "Todos", PalabraBuscada, "Todos",
-                     "Todos", "Todos", 0);
+                     "Todos", "Todos", 0 ,0);
 
 
                 if (searchResult)
@@ -89,11 +91,13 @@ namespace BibliaMAD
                     var Versiontext = Version.Text;
                     var Librotext = Libro.Text;
                     var Capitulotext = Convert.ToInt16(Capitulo.Text);
+                    Versi = Convert.ToInt16(Versiculo.Text);
 
                     PalabraBuscada = Palabras.Text;
-                    bool searchResult = Variables_globales.conexion.BuscarPalabras(2, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro, Id_Capitulo);
+                    bool searchResult = Variables_globales.conexion.BuscarPalabras(2, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento
+                        , Id_Version, Id_Libro, Versi, Id_Capitulo);
                     Variables_globales.conexion.AddHistory(Variables_globales.usuario, Idiomatext, PalabraBuscada, Testamentotext,
-                     Librotext, Versiontext, Capitulotext);
+                     Librotext, Versiontext,Versi ,Capitulotext);
                     if (searchResult)
                     {
                         // Si la búsqueda tiene éxito, mostrar los resultados en el DataGridView
@@ -130,7 +134,8 @@ namespace BibliaMAD
             Version.Enabled = false;
             Libro.Enabled = false;
             Capitulo.Enabled = false;
-
+            Versiculo.Enabled = false;
+            Versiculo.Text = "";
 
 
         }
@@ -311,7 +316,8 @@ namespace BibliaMAD
 
         private void Capitulo_SelectedIndexChanged(object sender, EventArgs e)
         {
-          Id_Capitulo = Convert.ToInt16(Capitulo.Text);        
+          Id_Capitulo = Convert.ToInt16(Capitulo.Text);
+            Versiculo.Enabled = true;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -329,6 +335,19 @@ namespace BibliaMAD
         private void Consultas_FormClosed(object sender, FormClosedEventArgs e)
         {
             Variables_globales.consulta.Close();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Versiculo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

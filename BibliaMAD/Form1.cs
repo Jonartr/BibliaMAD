@@ -127,7 +127,7 @@ namespace BibliaMAD
 
         private void Inicio_sesion_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Variables_globales.isesion.Close();
+          //  Variables_globales.isesion.Close();
         }
     }
 }

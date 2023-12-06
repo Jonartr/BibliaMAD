@@ -47,6 +47,9 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.Versiculo = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Resultado)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +59,7 @@
             this.Capitulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Capitulo.Enabled = false;
             this.Capitulo.FormattingEnabled = true;
-            this.Capitulo.Location = new System.Drawing.Point(483, 120);
+            this.Capitulo.Location = new System.Drawing.Point(483, 90);
             this.Capitulo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Capitulo.Name = "Capitulo";
             this.Capitulo.Size = new System.Drawing.Size(140, 24);
@@ -66,7 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(422, 123);
+            this.label2.Location = new System.Drawing.Point(422, 93);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 16);
             this.label2.TabIndex = 2;
@@ -76,7 +79,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(223, 123);
+            this.label3.Location = new System.Drawing.Point(226, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 16);
             this.label3.TabIndex = 4;
@@ -85,7 +88,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(271, 257);
+            this.label4.Location = new System.Drawing.Point(31, 244);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(120, 16);
             this.label4.TabIndex = 9;
@@ -93,7 +96,7 @@
             // 
             // Palabras
             // 
-            this.Palabras.Location = new System.Drawing.Point(265, 294);
+            this.Palabras.Location = new System.Drawing.Point(165, 241);
             this.Palabras.Name = "Palabras";
             this.Palabras.Size = new System.Drawing.Size(147, 22);
             this.Palabras.TabIndex = 10;
@@ -110,7 +113,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 345);
+            this.label5.Location = new System.Drawing.Point(18, 356);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(135, 16);
             this.label5.TabIndex = 13;
@@ -119,7 +122,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(303, 332);
+            this.button1.Location = new System.Drawing.Point(21, 289);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 14;
@@ -129,7 +132,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(504, 329);
+            this.button2.Location = new System.Drawing.Point(165, 289);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(134, 29);
             this.button2.TabIndex = 15;
@@ -141,7 +144,7 @@
             // 
             this.Idioma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Idioma.FormattingEnabled = true;
-            this.Idioma.Location = new System.Drawing.Point(62, 55);
+            this.Idioma.Location = new System.Drawing.Point(58, 29);
             this.Idioma.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Idioma.Name = "Idioma";
             this.Idioma.Size = new System.Drawing.Size(140, 24);
@@ -153,7 +156,7 @@
             this.Testamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Testamento.Enabled = false;
             this.Testamento.FormattingEnabled = true;
-            this.Testamento.Location = new System.Drawing.Point(293, 55);
+            this.Testamento.Location = new System.Drawing.Point(291, 32);
             this.Testamento.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Testamento.Name = "Testamento";
             this.Testamento.Size = new System.Drawing.Size(248, 24);
@@ -166,7 +169,7 @@
             this.Version.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Version.Enabled = false;
             this.Version.FormattingEnabled = true;
-            this.Version.Location = new System.Drawing.Point(62, 120);
+            this.Version.Location = new System.Drawing.Point(58, 87);
             this.Version.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Version.Name = "Version";
             this.Version.Size = new System.Drawing.Size(140, 24);
@@ -176,7 +179,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(223, 58);
+            this.label1.Location = new System.Drawing.Point(221, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 19;
@@ -185,7 +188,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 123);
+            this.label6.Location = new System.Drawing.Point(2, 90);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 16);
             this.label6.TabIndex = 20;
@@ -194,7 +197,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 58);
+            this.label7.Location = new System.Drawing.Point(6, 32);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 16);
             this.label7.TabIndex = 21;
@@ -205,7 +208,7 @@
             this.Libro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Libro.Enabled = false;
             this.Libro.FormattingEnabled = true;
-            this.Libro.Location = new System.Drawing.Point(266, 120);
+            this.Libro.Location = new System.Drawing.Point(269, 90);
             this.Libro.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Libro.Name = "Libro";
             this.Libro.Size = new System.Drawing.Size(140, 24);
@@ -215,7 +218,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(36, 34);
+            this.radioButton1.Location = new System.Drawing.Point(26, 12);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(58, 20);
             this.radioButton1.TabIndex = 23;
@@ -227,7 +230,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(154, 34);
+            this.radioButton2.Location = new System.Drawing.Point(144, 12);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(60, 20);
             this.radioButton2.TabIndex = 24;
@@ -238,6 +241,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.Versiculo);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.Idioma);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.Capitulo);
@@ -249,18 +255,43 @@
             this.groupBox1.Controls.Add(this.Version);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(21, 60);
+            this.groupBox1.Location = new System.Drawing.Point(21, 38);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(660, 194);
+            this.groupBox1.Size = new System.Drawing.Size(660, 179);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filtro";
+            this.groupBox1.Text = "so ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 146);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(59, 16);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Versiculo";
+            // 
+            // Versiculo
+            // 
+            this.Versiculo.Location = new System.Drawing.Point(71, 143);
+            this.Versiculo.Name = "Versiculo";
+            this.Versiculo.Size = new System.Drawing.Size(100, 22);
+            this.Versiculo.TabIndex = 24;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(68, 124);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 16);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Solo números";
             // 
             // Consultas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(937, 642);
+            this.ClientSize = new System.Drawing.Size(714, 642);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
@@ -305,5 +336,8 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox Versiculo;
     }
 }

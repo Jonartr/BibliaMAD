@@ -119,6 +119,42 @@ namespace BibliaMAD
             return isValid;
         }
 
+
+        public DataTable EstatusUsuario(string Correo)
+        {
+         //   bool isValid = false;
+            try
+            {
+                DataTable _tabla = new DataTable();
+                conectar();
+
+                string qry = "Rehabilitado";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 9000;
+
+                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 50);
+                parametro1.Value = Correo; 
+
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(_tabla);
+
+              
+
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+             //   isValid = false;
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return _tabla;
+        }
+
         public bool Insert_Users(int Opcion = 0, string Correo = "a", string Contraseña = "b"
             ,string Nombre = "c", DateTime Cumple = default(DateTime), int Genero = 0)
         {
@@ -183,7 +219,7 @@ namespace BibliaMAD
         }
 
         public bool BuscarPalabras(int Opcion = 0, string Correo = "", string PalabraBuscada = "", int Id_Idioma = 0,
-            int Id_Testamento = 0, int Id_Version = 0, int Id_Libro = 0, int Id_Capitulo = 0)
+            int Id_Testamento = 0, int Id_Version = 0, int Id_Libro = 0,int Versiculo = 0, int Id_Capitulo = 0)
         {
             bool search_ok = false;
             try
@@ -217,6 +253,9 @@ namespace BibliaMAD
 
                 var Email = _comandosql.Parameters.Add("@Correo", SqlDbType.VarChar,100);
                 Email.Value = Correo;
+
+                var Versi = _comandosql.Parameters.Add("@Versiculo", SqlDbType.Int);
+                Versi.Value = Versiculo;
 
                 _adaptador.SelectCommand = _comandosql;
 
@@ -766,7 +805,7 @@ namespace BibliaMAD
         }
 
         public bool AddHistory(string Correo,string idioma = "", string Palabra = "", string Testamento = "",
-            string Libro = "", string Version = "" , int Capitulo = 0)
+            string Libro = "", string Version = "",int Versiculo = 0 , int Capitulo = 0)
         {
             var msg = "";
             var add = false;
@@ -798,6 +837,10 @@ namespace BibliaMAD
 
                 var Cap = _comandosql.Parameters.Add("@Capitulo", SqlDbType.Int);
                 Cap.Value = Capitulo;
+
+
+                var Versi = _comandosql.Parameters.Add("@Versiculo", SqlDbType.Int);
+                Versi.Value = Versiculo;
 
 
                 _adaptador.InsertCommand = _comandosql;
