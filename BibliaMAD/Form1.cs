@@ -13,8 +13,8 @@ namespace BibliaMAD
 {
     public partial class Inicio_sesion : Form
     {
-       
-       
+
+        bool checkpassword = true;
         public Inicio_sesion()
         {
             InitializeComponent();
@@ -106,8 +106,7 @@ namespace BibliaMAD
 
         private void button1_Click(object sender, EventArgs e)
         {
-      //      var conectar = new EnlaceDB();
-        //    conectar.get_Users();
+
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -127,7 +126,21 @@ namespace BibliaMAD
 
         private void Inicio_sesion_FormClosed(object sender, FormClosedEventArgs e)
         {
-          //  Variables_globales.isesion.Close();
+            Application.Exit();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkpassword)
+            {
+                checkpassword = false;
+                password.PasswordChar = '\0';
+            }
+            else {
+                    checkpassword = true;
+                    password.PasswordChar = '*';
+            }
+            
         }
     }
 }

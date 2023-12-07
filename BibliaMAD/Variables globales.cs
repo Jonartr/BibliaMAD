@@ -21,12 +21,15 @@ namespace BibliaMAD
             //QUERYS 
             public static DataTable Consultas { get; set; } = new DataTable();
             public static DataTable Fav { get; set; } = new DataTable();
+            public static DataTable Historial { get; set; } = new DataTable();
+             public static DataTable FavInicio { get; set; } = new DataTable();
+
 
 
 
 
         //Variables de ventana
-            public static EnlaceDB conexion = new EnlaceDB();
+        public static EnlaceDB conexion = new EnlaceDB();
             public static Ayuda help = new Ayuda(); 
             public static Pagina_principal inicio = new Pagina_principal(); 
             public static Favoritos favorito = new Favoritos();  
@@ -35,7 +38,7 @@ namespace BibliaMAD
             public static Historial historial = new Historial();
             public static Administrador adminis = new Administrador();
             public static Edicion_perfil editar = new Edicion_perfil();
-             public static Inicio_sesion isesion = new Inicio_sesion();
+            public static Inicio_sesion isesion = new Inicio_sesion();
 
 
     }

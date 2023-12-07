@@ -13,7 +13,7 @@ namespace BibliaMAD
 {
     public partial class Pagina_principal : Form
     {
-      
+        SpeechSynthesizer audio = new SpeechSynthesizer();
         public Pagina_principal()
         {
          
@@ -87,9 +87,9 @@ namespace BibliaMAD
             label2.Text = Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
             label2.MaximumSize = new Size(300,0);
             label2.AutoSize = true;
-            SpeechSynthesizer audio = new SpeechSynthesizer();
             if (!string.IsNullOrEmpty(label2.Text))
             {
+              
                 audio.SpeakAsyncCancelAll();
                 audio.SpeakAsync(label2.Text);
             }
@@ -112,7 +112,6 @@ namespace BibliaMAD
         private void button4_Click(object sender, EventArgs e)
         {
             label2.Text = Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
-            SpeechSynthesizer audio = new SpeechSynthesizer();
             if (!string.IsNullOrEmpty(label2.Text))
             {
                 audio.SpeakAsyncCancelAll();

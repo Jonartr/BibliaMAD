@@ -58,7 +58,7 @@ namespace BibliaMAD
             //Regex para validaciones 
             string isEmail = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
             string isPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$";
-            string isLetter = @"^[a-zA-Z]+$";
+            string isLetter = @"^[a-zA-Z ]+$";
 
 
 
@@ -144,7 +144,7 @@ namespace BibliaMAD
                 if (register)
                 {
                     MessageBox.Show("Informacion actualizada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    this.Close();
                 }
             }
         }

@@ -297,7 +297,7 @@ namespace BibliaMAD
             get { return _resultadoBusqueda; }
         }
         //Busqueda de consultas en la biblia
-        public bool BuscarPalabras(int Opcion = 0, string Correo = "", string PalabraBuscada = "", int Id_Idioma = 0,
+        public bool BuscarPalabras(int Opcion, string Correo = "", string PalabraBuscada = "", int Id_Idioma = 0,
             int Id_Testamento = 0, int Id_Version = 0, int Id_Libro = 0,int Versiculo = 0, int Id_Capitulo = 0)
         {
             bool search_ok = false;
@@ -309,8 +309,9 @@ namespace BibliaMAD
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 9000;
 
-                var Opcionsql = _comandosql.Parameters.Add("@Opcion", SqlDbType.NVarChar, 100);
-                Opcionsql.Value = Opcion;
+
+                var Option = _comandosql.Parameters.Add("@Opcion", SqlDbType.NVarChar, 100);
+                Option.Value = Opcion;
 
                 var PalabraParam = _comandosql.Parameters.Add("@PalabraBuscada", SqlDbType.NVarChar, 100);
                 PalabraParam.Value = PalabraBuscada;
@@ -346,7 +347,7 @@ namespace BibliaMAD
                     Variables_globales.Consultas = _resultadoBusqueda;
                 }
                 else{
-                    Variables_globales.Consultas = null;
+                 //   Variables_globales.Consultas = null;
                     MessageBox.Show("No se encontraron resultados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
@@ -594,7 +595,7 @@ namespace BibliaMAD
             return tabla;
         }
 
-        public DataTable Filtro_Capitulos(int Libro)
+        public DataTable Filtro_Capitulos(int Libro, int Version)
         {
 
             DataTable tabla = new DataTable();
@@ -609,6 +610,8 @@ namespace BibliaMAD
 
                 var Caps = _comandosql.Parameters.Add("@Libro", SqlDbType.Int);
                 Caps.Value = Libro;
+                var Vers = _comandosql.Parameters.Add("@Version", SqlDbType.Int);
+                Vers.Value = Version;
 
 
                 _adaptador.SelectCommand = _comandosql;
@@ -677,7 +680,6 @@ namespace BibliaMAD
         public DataTable GetFavorite(string Correo)
         {
             var msg = "";
-            var add = false;
             try
             {
                 conectar();
@@ -691,14 +693,13 @@ namespace BibliaMAD
 
 
                 _adaptador.SelectCommand = _comandosql;
-                _adaptador.Fill(Variables_globales.Consultas);
+                _adaptador.Fill(Variables_globales.Fav);
                _comandosql.ExecuteNonQuery();
 
-                add = true;
             }
             catch (SqlException e)
             {
-                add = false;
+
                 msg = "Excepción de base de datos: \n";
                 msg += e.Message;
                 MessageBox.Show(msg, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -708,7 +709,7 @@ namespace BibliaMAD
                 desconectar();
             }
 
-            return Variables_globales.Consultas;
+            return Variables_globales.Fav;
         }
 
         //Esta trae un favorito al azar a la ventana de pagina principal
@@ -851,9 +852,9 @@ namespace BibliaMAD
         }
         public DataTable MostrarHistorialUsuarioActivo(string Correo)
         {
-            DataTable datos = new DataTable();
+            
             var msg = "";
-            var add = false;
+
             try
             {
                 conectar();
@@ -865,12 +866,12 @@ namespace BibliaMAD
                 parametro1.Value = Correo;
 
                 _adaptador.SelectCommand = _comandosql;
-                _adaptador.Fill(datos);
+                _adaptador.Fill(Variables_globales.Historial);
 
             }
             catch (SqlException e)
             {
-                add = false;
+
                 msg = "Excepción de base de datos: \n";
                 msg += e.Message;
                 MessageBox.Show(msg, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -880,7 +881,7 @@ namespace BibliaMAD
                 desconectar();
             }
 
-            return datos;
+            return Variables_globales.Historial;
         }
 
         public bool AddHistory(string Correo,string idioma = "", string Palabra = "", string Testamento = "",

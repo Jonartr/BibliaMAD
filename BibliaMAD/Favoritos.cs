@@ -25,10 +25,10 @@ namespace BibliaMAD
 
         private void Favoritos_Load(object sender, EventArgs e)
         {
-            Variables_globales.Consultas.Clear();
-           Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
+            Variables_globales.Fav.Clear();
+             Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
             dataGridView1.DataSource = null;
-            dataGridView1.DataSource = Variables_globales.Consultas;
+            dataGridView1.DataSource = Variables_globales.Fav;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -48,7 +48,10 @@ namespace BibliaMAD
             {
                 Variables_globales.conexion.DeleteFavorite(Variables_globales.usuario, 1);
                 MessageBox.Show("Favorito borrado con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                Variables_globales.Fav.Clear();
+                Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = Variables_globales.Fav;
             }
         }
 
@@ -61,7 +64,10 @@ namespace BibliaMAD
             {
                 Variables_globales.conexion.DeleteFavorite(Variables_globales.usuario, 2, idFav);
                 MessageBox.Show("Favoritos borrados con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                Variables_globales.Fav.Clear();
+                Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = Variables_globales.Fav;
             }
         }
 

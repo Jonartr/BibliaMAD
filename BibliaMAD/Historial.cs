@@ -21,11 +21,9 @@ namespace BibliaMAD
 
         private void Historial_Load(object sender, EventArgs e)
         {
-            
-            DataTable datos = Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
-
-            
-            dataGridView1.DataSource = datos;
+            Variables_globales.Historial.Clear();
+            Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
+            dataGridView1.DataSource = Variables_globales.Historial;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -39,8 +37,9 @@ namespace BibliaMAD
                 {
                     MessageBox.Show("Busqueda borrada con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridView1.DataSource = null;
-                    DataTable datos = Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
-                    dataGridView1.DataSource = datos;
+                    Variables_globales.Historial.Clear();
+                     Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
+                    dataGridView1.DataSource = Variables_globales.Historial;
                 }
 
             }
@@ -57,8 +56,7 @@ namespace BibliaMAD
                 {
                     MessageBox.Show("Historial borrado con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridView1.DataSource = null;
-               //     DataTable datos = Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
-               //    dataGridView1.DataSource = datos;
+                    Variables_globales.Historial.Clear();
                 }
                 
             }
