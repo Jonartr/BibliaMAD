@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Speech.Synthesis;
 
 namespace BibliaMAD
 {
     public partial class Consultas : Form
     {
 
-
+        SpeechSynthesizer audio = new SpeechSynthesizer();
         int Id_Idioma = 0;
         int Id_Testamento = 0;
         int Id_Version = 0;
@@ -89,6 +90,9 @@ namespace BibliaMAD
             int vacio = 0;
             if (Idioma.Text != "")
             {
+                Idiomat = Idioma.Text;
+
+
                 if (Idioma.Text != "Todos")
                 {
                     Id_Idioma = Convert.ToInt16(Idioma.Text.Substring(0, 2));
@@ -97,6 +101,7 @@ namespace BibliaMAD
             }
             if (Version.Text != "")
             {
+                Versiont = Version.Text;
                 if (Version.Text != "Todos")
                 {
                     Id_Version = Convert.ToInt16(Version.Text.Substring(0, 2));
@@ -105,6 +110,7 @@ namespace BibliaMAD
             }
             if (Testamento.Text != "")
             {
+                Testamentot = Testamento.Text;
                 if (Testamento.Text != "Todos")
                 {
                     Id_Testamento = Convert.ToInt16(Testamento.Text.Substring(0, 2));
@@ -117,6 +123,7 @@ namespace BibliaMAD
             }
             if (Libro.Text != "")
             {
+                Librot = Libro.Text;
                 if (Libro.Text != "Todos")
                 {
                     Id_Libro = Convert.ToInt16(Libro.Text.Substring(0, 2));
@@ -161,12 +168,17 @@ namespace BibliaMAD
                     Variables_globales.conexion.BuscarPalabras(0, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento,
                   Id_Version, Id_Libro, Versi, Id_Capitulo);
 
+                    Variables_globales.conexion.AddHistory( Variables_globales.usuario, Idiomat, PalabraBuscada, Testamentot,
+                 Librot, Versiont, Versi, Id_Capitulo);
+
                 }
                 else
                 {
                     Variables_globales.conexion.BuscarPalabras(3, Variables_globales.usuario, PalabraBuscada);
+                    Variables_globales.conexion.AddHistory(Variables_globales.usuario, "Todos", PalabraBuscada, "Todos",
+                        "Todos", "Todos", 0, 0);
                 }
-            
+                    
 
                 if (Variables_globales.Consultas.Rows.Count > 0 || Variables_globales.Consultas == null)
                 {
@@ -205,20 +217,27 @@ namespace BibliaMAD
             label10.Text = (Resultado.Rows[rowindex].Cells[0].Value.ToString());
             label10.MaximumSize = new Size(300, 100);
             label10.AutoSize = true;
+            if (!string.IsNullOrEmpty(label10.Text))
+            {
+
+                audio.SpeakAsyncCancelAll();
+                audio.SpeakAsync(label10.Text);
+            }
         }
 
         private void Consultas_Load(object sender, EventArgs e)
         {
             Resultado.CellPainting += Resultado_CellPainting;
 
-            Variables_globales.Consultas =  Variables_globales.conexion.Get_Books();
+         
 
             groupBox1.Enabled = true;
 
             checkBox1.Checked = false;
 
-         //   Idioma.Items.Add("Todos");
-                foreach (DataRow row in Variables_globales.Consultas.Rows)
+            //   Idioma.Items.Add("Todos");
+            Variables_globales.Consultas = Variables_globales.conexion.Get_Books();
+            foreach (DataRow row in Variables_globales.Consultas.Rows)
                 {
               
                     if (!Idioma.Items.Contains(row["Nombre"])) {
@@ -295,11 +314,6 @@ namespace BibliaMAD
                     }
 
                 }
-                else
-                {
-                    MessageBox.Show("No se encontraron resultados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-       
-                }
 
 
 
@@ -318,35 +332,37 @@ namespace BibliaMAD
             if (Testamento.Text != "Todos")
             {
                 Id_Testamento = Convert.ToInt16(Testamento.Text.Substring(0, 2));
+            }
+            else
+            {
+                Id_Testamento = 0;
+            }
 
+            try
+            {
                 DataTable tLibros;
-
-
-                try
+                tLibros = Variables_globales.conexion.Filtro_Libros(Id_Idioma, Id_Testamento);
+                Libro.Items.Clear();
+                Libro.Items.Add("Todos");
+                foreach (DataRow row in tLibros.Rows)
                 {
-                    tLibros = Variables_globales.conexion.Filtro_Libros(Id_Idioma, Id_Testamento);
-                    Libro.Items.Clear();
-                    Libro.Items.Add("Todos");
-                    foreach (DataRow row in tLibros.Rows)
+
+                    if (!Libro.Items.Contains(row["Nombre"]))
                     {
-
-                        if (!Libro.Items.Contains(row["Nombre"]))
-                        {
-                            Libro.Items.Add(row["No. Libro"].ToString() + " - " + row["Nombre"].ToString());
-                        }
-
-
+                        Libro.Items.Add(row["No. Libro"].ToString() + " - " + row["Nombre"].ToString());
                     }
 
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error en el filtro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 }
+
             }
-              
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en el filtro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+
         }
 
 
@@ -356,8 +372,12 @@ namespace BibliaMAD
            
             if(Version.Text != "")
             {
-                Id_Version = Convert.ToInt16(Version.Text.Substring(0, 2));
-             
+                if (Version.Text != "Todos")
+                {
+                    Id_Version = Convert.ToInt16(Version.Text.Substring(0, 2));
+
+                }
+
             }
            
           
@@ -439,6 +459,40 @@ namespace BibliaMAD
                 filtro = false;
                 groupBox1.Enabled = true;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+             Id_Idioma = 0;
+             Id_Testamento = 0;
+             Id_Version = 0;
+             Id_Libro = 0;
+             Id_Capitulo = 0;
+            Versi = 0;
+            Idiomat = ""; 
+            Testamentot = ""; 
+            Versiont = ""; 
+            Librot = "";
+            PalabraBuscada = "";
+            Testamento.Items.Clear();
+            Version.Items.Clear();
+            Libro.Items.Clear();
+            Capitulo.Items.Clear();
+            Idioma.Items.Clear();
+            Versiculo.ResetText();
+            Palabras.ResetText();
+            Variables_globales.Consultas = Variables_globales.conexion.Get_Books();
+            foreach (DataRow row in Variables_globales.Consultas.Rows)
+            {
+
+                if (!Idioma.Items.Contains(row["Nombre"]))
+                {
+                    Idioma.Items.Add(row["No. Idioma"].ToString() + " - " + row["Nombre"].ToString());
+                }
+
+
+            }
+
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

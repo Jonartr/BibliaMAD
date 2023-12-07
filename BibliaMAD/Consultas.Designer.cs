@@ -50,6 +50,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Resultado)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -266,7 +267,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(434, 248);
+            this.label10.Location = new System.Drawing.Point(438, 248);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(62, 16);
             this.label10.TabIndex = 26;
@@ -284,11 +285,22 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(810, 198);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 28;
+            this.button3.Text = "Limpiar ";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Consultas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 642);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.groupBox1);
@@ -336,5 +348,6 @@
         private System.Windows.Forms.TextBox Versiculo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button3;
     }
 }
