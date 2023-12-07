@@ -75,10 +75,12 @@ namespace BibliaMAD
                 {
                     var Estado = Convert.ToInt16(Variables_globales.Consultas.Rows[0]["Rehabilitado"]);
                     var Estado2 = Convert.ToInt16(Variables_globales.Consultas.Rows[0]["Estatus"]);
+                    Variables_globales.conexion.Newtemp(Usuario);
+                    string pptemp = Variables_globales.Consultas.Rows[0]["Contraseña"].ToString();
                     if (Estado == 1 && Estado2 == 0)
                     {
-                        MessageBox.Show("Rehabilitacion valida\nRegrse a inicio de sesion" +
-                            "para recibir contraseña temporal", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Rehabilitacion valida"
+                            + "\nTu nueva contraseña es: \n" + pptemp, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
                     }
@@ -100,6 +102,11 @@ namespace BibliaMAD
                 MessageBox.Show("Error", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
+
+        }
+
+        private void Ayuda_Load(object sender, EventArgs e)
+        {
 
         }
     }

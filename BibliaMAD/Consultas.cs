@@ -58,7 +58,6 @@ namespace BibliaMAD
             {
                 PalabraBuscada = Palabras.Text;
             
-                Variables_globales.Consultas = null;
                 bool searchResult = Variables_globales.conexion.BuscarPalabras(1, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento, Id_Version, Id_Libro, Id_Capitulo);
                 Variables_globales.conexion.AddHistory(Variables_globales.usuario, "Todos", PalabraBuscada, "Todos",
                      "Todos", "Todos", 0 ,0);
@@ -90,14 +89,33 @@ namespace BibliaMAD
                     var Testamentotext = Testamento.Text;
                     var Versiontext = Version.Text;
                     var Librotext = Libro.Text;
-                    var Capitulotext = Convert.ToInt16(Capitulo.Text);
-                    Versi = Convert.ToInt16(Versiculo.Text);
+                  
+                    if (Capitulo.Text!= "")
+                    {
+                         Id_Capitulo = Convert.ToInt16(Capitulo.Text);
+                    }
+                    else
+                    {
+                         Id_Capitulo = 0;
+                    }
+
+                    if(Versiculo.Text != "")
+                    {
+                        Versi = Convert.ToInt16(Versiculo.Text);
+
+                    }
+                    else
+                    {
+                        Versi = 0;
+                    }
+
+                   
 
                     PalabraBuscada = Palabras.Text;
                     bool searchResult = Variables_globales.conexion.BuscarPalabras(2, Variables_globales.usuario, PalabraBuscada, Id_Idioma, Id_Testamento
                         , Id_Version, Id_Libro, Versi, Id_Capitulo);
                     Variables_globales.conexion.AddHistory(Variables_globales.usuario, Idiomatext, PalabraBuscada, Testamentotext,
-                     Librotext, Versiontext,Versi ,Capitulotext);
+                     Librotext, Versiontext,Versi , Id_Capitulo);
                     if (searchResult)
                     {
                         // Si la búsqueda tiene éxito, mostrar los resultados en el DataGridView
@@ -129,12 +147,6 @@ namespace BibliaMAD
             Testamento.Items.Clear();
             Libro.Items.Clear();
             Capitulo.Items.Clear();
-
-            Testamento.Enabled =false;
-            Version.Enabled = false;
-            Libro.Enabled = false;
-            Capitulo.Enabled = false;
-            Versiculo.Enabled = false;
             Versiculo.Text = "";
 
 
@@ -142,7 +154,10 @@ namespace BibliaMAD
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            int rowindex = Resultado.CurrentCell.RowIndex;
+            label10.Text = (Resultado.Rows[rowindex].Cells[5].Value.ToString());
+            label10.MaximumSize = new Size(200, 0);
+            label10.AutoSize = true;
         }
 
         private void Consultas_Load(object sender, EventArgs e)
@@ -196,8 +211,6 @@ namespace BibliaMAD
                 Testamento.Items.Clear();
                 Libro.Items.Clear();
                 Capitulo.Items.Clear();
-                Libro.Enabled = false;
-                Capitulo.Enabled = false;
                 if(tVersion.Rows.Count >0|| tTestamento.Rows.Count > 0)
                 {
                     foreach (DataRow row in tVersion.Rows)
@@ -215,20 +228,17 @@ namespace BibliaMAD
 
                         if (!Testamento.Items.Contains(row["Nombre"]))
                         {
-                            Testamento.Items.Add(row["Nombre"].ToString());
+                            Testamento.Items.Add(row["Version"].ToString() + " - " + row["Nombre"].ToString());
                         }
 
 
                     }
 
-                    Version.Enabled = true;
-                    Testamento.Enabled = true;
                 }
                 else
                 {
                     MessageBox.Show("No se encontraron resultados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Version.Enabled = false;
-                    Testamento.Enabled = false;
+       
                 }
 
 
@@ -245,13 +255,14 @@ namespace BibliaMAD
 
         private void Testamento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Id_Testamento = Convert.ToInt16(Testamento.SelectedIndex) + 1;
+            Id_Testamento = Convert.ToInt16(Testamento.Text.Substring(0, 2));
         }
 
 
 
         private void Version_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
             Id_Version = Convert.ToInt16(Version.SelectedIndex) + 1;
             DataTable tLibros;
           
@@ -266,12 +277,12 @@ namespace BibliaMAD
 
                         if (!Libro.Items.Contains(row["Nombre"]))
                         {
-                            Libro.Items.Add(row["No. Libro"].ToString() + " " + row["Nombre"].ToString());
+                            Libro.Items.Add(row["No. Libro"].ToString() + " - " + row["Nombre"].ToString());
                         }
 
 
                     }
-                    Libro.Enabled = true;
+
                 }
 
                 catch (Exception ex)
@@ -304,7 +315,7 @@ namespace BibliaMAD
 
 
                 }
-                Capitulo.Enabled = true;
+
             }
 
             catch (Exception ex)
@@ -317,18 +328,18 @@ namespace BibliaMAD
         private void Capitulo_SelectedIndexChanged(object sender, EventArgs e)
         {
           Id_Capitulo = Convert.ToInt16(Capitulo.Text);
-            Versiculo.Enabled = true;
+
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            groupBox1.Enabled = false;
+
             filtro = false;
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            groupBox1.Enabled = true;
+
             filtro = true;
         }
 
@@ -346,6 +357,11 @@ namespace BibliaMAD
         }
 
         private void Versiculo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
         {
 
         }

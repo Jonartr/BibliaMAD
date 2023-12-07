@@ -20,11 +20,13 @@ namespace BibliaMAD
 
             //QUERYS 
             public static DataTable Consultas { get; set; } = new DataTable();
+            public static DataTable Fav { get; set; } = new DataTable();
 
- 
+
+
 
         //Variables de ventana
-             public static EnlaceDB conexion = new EnlaceDB();
+            public static EnlaceDB conexion = new EnlaceDB();
             public static Ayuda help = new Ayuda(); 
             public static Pagina_principal inicio = new Pagina_principal(); 
             public static Favoritos favorito = new Favoritos();  

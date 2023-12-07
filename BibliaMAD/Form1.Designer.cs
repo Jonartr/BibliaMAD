@@ -48,7 +48,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(46, 229);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 16);
+            this.label1.Size = new System.Drawing.Size(163, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "Correo electronico:";
             // 
@@ -56,14 +56,15 @@
             // 
             this.email.Location = new System.Drawing.Point(165, 226);
             this.email.Name = "email";
-            this.email.Size = new System.Drawing.Size(166, 22);
+            this.email.Size = new System.Drawing.Size(166, 30);
             this.email.TabIndex = 1;
             // 
             // password
             // 
             this.password.Location = new System.Drawing.Point(165, 270);
             this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(166, 22);
+            this.password.PasswordChar = '*';
+            this.password.Size = new System.Drawing.Size(166, 30);
             this.password.TabIndex = 3;
             // 
             // label2
@@ -71,7 +72,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(80, 273);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 16);
+            this.label2.Size = new System.Drawing.Size(106, 22);
             this.label2.TabIndex = 2;
             this.label2.Text = "Contraseña:";
             // 
@@ -90,7 +91,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(127, 388);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 16);
+            this.label3.Size = new System.Drawing.Size(161, 22);
             this.label3.TabIndex = 5;
             this.label3.Text = "¿No tienes cuenta?";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -100,7 +101,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Location = new System.Drawing.Point(241, 388);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(89, 16);
+            this.linkLabel1.Size = new System.Drawing.Size(131, 22);
             this.linkLabel1.TabIndex = 6;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Registrate aqui";
@@ -111,7 +112,7 @@
             this.checkadmin.AutoSize = true;
             this.checkadmin.Location = new System.Drawing.Point(165, 314);
             this.checkadmin.Name = "checkadmin";
-            this.checkadmin.Size = new System.Drawing.Size(107, 20);
+            this.checkadmin.Size = new System.Drawing.Size(155, 26);
             this.checkadmin.TabIndex = 7;
             this.checkadmin.Text = "Administrador";
             this.checkadmin.UseVisualStyleBackColor = true;
@@ -122,7 +123,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(122, 424);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(150, 16);
+            this.label4.Size = new System.Drawing.Size(222, 22);
             this.label4.TabIndex = 9;
             this.label4.Text = "¿Problemas para ingresar?";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -132,7 +133,7 @@
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Location = new System.Drawing.Point(127, 451);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(84, 16);
+            this.linkLabel2.Size = new System.Drawing.Size(124, 22);
             this.linkLabel2.TabIndex = 10;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Haz click aqui";
@@ -154,14 +155,14 @@
             this.label5.Font = new System.Drawing.Font("Book Antiqua", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(160, 35);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(145, 26);
+            this.label5.Size = new System.Drawing.Size(223, 38);
             this.label5.TabIndex = 12;
             this.label5.Text = "Holy Answers";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // Inicio_sesion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 554);
             this.Controls.Add(this.label5);

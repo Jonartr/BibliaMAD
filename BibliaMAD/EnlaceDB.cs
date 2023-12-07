@@ -66,6 +66,7 @@ namespace BibliaMAD
             _conexion.Close();
         }
 
+        //Login de usuario y administrador
         public bool Autentificar(string us, string ps, int  admin = 1)
         {
             bool isValid = false;
@@ -119,7 +120,7 @@ namespace BibliaMAD
             return isValid;
         }
 
-
+        //Verificar si hay proceso de rehabilitacion del usuario
         public DataTable EstatusUsuario(string Correo)
         {
          //   bool isValid = false;
@@ -155,6 +156,84 @@ namespace BibliaMAD
             return _tabla;
         }
 
+
+        //Verificar si hay proceso de rehabilitacion del usuario
+        public DataTable Contratemp(string Correo)
+        {
+            //   bool isValid = false;
+            try
+            {
+                DataTable _tabla = new DataTable();
+                conectar();
+
+                string qry = "ContraseñaTemp";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 100);
+                parametro1.Value = Correo;
+
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(Variables_globales.Consultas);
+
+
+
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //   isValid = false;
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return _tabla;
+        }
+
+        public DataTable Newtemp(string Correo)
+        {
+            //   bool isValid = false;
+            try
+            {
+                DataTable _tabla = new DataTable();
+                conectar();
+
+                string qry = "ContrasenaTemp";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+                var parametro1 = _comandosql.Parameters.Add("@Correo", SqlDbType.Char, 100);
+                parametro1.Value = Correo;
+
+                _adaptador.SelectCommand = _comandosql;
+                _adaptador.Fill(Variables_globales.Consultas);
+
+                if (Variables_globales.Consultas.Rows.Count>0) {
+                    int i = 0;
+                }
+
+
+
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //   isValid = false;
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return Variables_globales.Consultas;
+        }
+
+
+        //ABC de usuarios
         public bool Insert_Users(int Opcion = 0, string Correo = "a", string Contraseña = "b"
             ,string Nombre = "c", DateTime Cumple = default(DateTime), int Genero = 0)
         {
@@ -217,7 +296,7 @@ namespace BibliaMAD
         {
             get { return _resultadoBusqueda; }
         }
-
+        //Busqueda de consultas en la biblia
         public bool BuscarPalabras(int Opcion = 0, string Correo = "", string PalabraBuscada = "", int Id_Idioma = 0,
             int Id_Testamento = 0, int Id_Version = 0, int Id_Libro = 0,int Versiculo = 0, int Id_Capitulo = 0)
         {
@@ -369,7 +448,7 @@ namespace BibliaMAD
 
             return tabla;
         }
-
+        //Empieza filtros para consultas primero empezando por idiomas
         public DataTable Get_Books()
         {
             var msg = "";
@@ -595,7 +674,7 @@ namespace BibliaMAD
             return add;
         }
         //Esta trae todos los favoritos a la ventana de favoritos 
-        public bool GetFavorite(string Correo)
+        public DataTable GetFavorite(string Correo)
         {
             var msg = "";
             var add = false;
@@ -613,7 +692,7 @@ namespace BibliaMAD
 
                 _adaptador.SelectCommand = _comandosql;
                 _adaptador.Fill(Variables_globales.Consultas);
-                _comandosql.ExecuteNonQuery();
+               _comandosql.ExecuteNonQuery();
 
                 add = true;
             }
@@ -629,7 +708,7 @@ namespace BibliaMAD
                 desconectar();
             }
 
-            return add;
+            return Variables_globales.Consultas;
         }
 
         //Esta trae un favorito al azar a la ventana de pagina principal

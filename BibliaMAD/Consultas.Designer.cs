@@ -47,9 +47,10 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.Versiculo = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.Versiculo = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Resultado)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +58,6 @@
             // Capitulo
             // 
             this.Capitulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Capitulo.Enabled = false;
             this.Capitulo.FormattingEnabled = true;
             this.Capitulo.Location = new System.Drawing.Point(483, 90);
             this.Capitulo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -106,6 +106,7 @@
             this.Resultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Resultado.Location = new System.Drawing.Point(21, 375);
             this.Resultado.Name = "Resultado";
+            this.Resultado.RowHeadersWidth = 62;
             this.Resultado.Size = new System.Drawing.Size(660, 237);
             this.Resultado.TabIndex = 12;
             this.Resultado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -154,7 +155,6 @@
             // Testamento
             // 
             this.Testamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Testamento.Enabled = false;
             this.Testamento.FormattingEnabled = true;
             this.Testamento.Location = new System.Drawing.Point(291, 32);
             this.Testamento.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -167,7 +167,6 @@
             // 
             this.Version.BackColor = System.Drawing.SystemColors.Window;
             this.Version.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Version.Enabled = false;
             this.Version.FormattingEnabled = true;
             this.Version.Location = new System.Drawing.Point(58, 87);
             this.Version.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -206,7 +205,6 @@
             // Libro
             // 
             this.Libro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Libro.Enabled = false;
             this.Libro.FormattingEnabled = true;
             this.Libro.Location = new System.Drawing.Point(269, 90);
             this.Libro.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -254,29 +252,12 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.Version);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Enabled = false;
             this.groupBox1.Location = new System.Drawing.Point(21, 38);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(660, 179);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "so ";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 146);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 16);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Versiculo";
-            // 
-            // Versiculo
-            // 
-            this.Versiculo.Location = new System.Drawing.Point(71, 143);
-            this.Versiculo.Name = "Versiculo";
-            this.Versiculo.Size = new System.Drawing.Size(100, 22);
-            this.Versiculo.TabIndex = 24;
             // 
             // label9
             // 
@@ -287,11 +268,38 @@
             this.label9.TabIndex = 25;
             this.label9.Text = "Solo números";
             // 
+            // Versiculo
+            // 
+            this.Versiculo.Location = new System.Drawing.Point(71, 143);
+            this.Versiculo.Name = "Versiculo";
+            this.Versiculo.Size = new System.Drawing.Size(100, 22);
+            this.Versiculo.TabIndex = 24;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 146);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(59, 16);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Versiculo";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(364, 244);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(62, 16);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Versiculo:";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
             // Consultas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(714, 642);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
@@ -339,5 +347,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox Versiculo;
+        private System.Windows.Forms.Label label10;
     }
 }

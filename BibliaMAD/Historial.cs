@@ -57,8 +57,8 @@ namespace BibliaMAD
                 {
                     MessageBox.Show("Historial borrado con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridView1.DataSource = null;
-                    DataTable datos = Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
-                    dataGridView1.DataSource = datos;
+               //     DataTable datos = Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
+               //    dataGridView1.DataSource = datos;
                 }
                 
             }

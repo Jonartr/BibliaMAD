@@ -25,7 +25,8 @@ namespace BibliaMAD
 
         private void Favoritos_Load(object sender, EventArgs e)
         {
-            Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
+            Variables_globales.Consultas.Clear();
+           Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = Variables_globales.Consultas;
         }

@@ -40,7 +40,7 @@
             this.textBox1.Location = new System.Drawing.Point(150, 149);
             this.textBox1.Margin = new System.Windows.Forms.Padding(0, 25, 0, 25);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(179, 22);
+            this.textBox1.Size = new System.Drawing.Size(179, 30);
             this.textBox1.TabIndex = 0;
             // 
             // label1
@@ -49,7 +49,7 @@
             this.label1.Location = new System.Drawing.Point(31, 153);
             this.label1.Margin = new System.Windows.Forms.Padding(0, 25, 0, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 16);
+            this.label1.Size = new System.Drawing.Size(163, 22);
             this.label1.TabIndex = 1;
             this.label1.Text = "Correo electronico:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -71,7 +71,7 @@
             this.label2.Location = new System.Drawing.Point(8, 81);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(422, 16);
+            this.label2.Size = new System.Drawing.Size(623, 22);
             this.label2.TabIndex = 5;
             this.label2.Text = "Ingrese su correo, un administrador verificara su situacion para rehabilitarlo";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -88,7 +88,7 @@
             // 
             // Ayuda
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(439, 323);
             this.Controls.Add(this.button2);
@@ -101,6 +101,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Ayuda";
             this.Text = "Ayuda";
+            this.Load += new System.EventHandler(this.Ayuda_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

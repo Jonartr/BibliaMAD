@@ -47,6 +47,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.perfilToolStripMenuItem,
             this.consultarToolStripMenuItem,
@@ -56,7 +58,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(472, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(472, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -66,49 +68,49 @@
             this.editarToolStripMenuItem,
             this.inhabilitarseToolStripMenuItem});
             this.perfilToolStripMenuItem.Name = "perfilToolStripMenuItem";
-            this.perfilToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.perfilToolStripMenuItem.Size = new System.Drawing.Size(69, 26);
             this.perfilToolStripMenuItem.Text = "Perfil";
             this.perfilToolStripMenuItem.Click += new System.EventHandler(this.perfilToolStripMenuItem_Click);
             // 
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            this.editarToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(209, 34);
             this.editarToolStripMenuItem.Text = "Editar";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
             // inhabilitarseToolStripMenuItem
             // 
             this.inhabilitarseToolStripMenuItem.Name = "inhabilitarseToolStripMenuItem";
-            this.inhabilitarseToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.inhabilitarseToolStripMenuItem.Size = new System.Drawing.Size(209, 34);
             this.inhabilitarseToolStripMenuItem.Text = "Inhabilitarse";
             this.inhabilitarseToolStripMenuItem.Click += new System.EventHandler(this.inhabilitarseToolStripMenuItem_Click);
             // 
             // consultarToolStripMenuItem
             // 
             this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(110, 26);
             this.consultarToolStripMenuItem.Text = "Consultar ";
             this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click);
             // 
             // favoritosToolStripMenuItem
             // 
             this.favoritosToolStripMenuItem.Name = "favoritosToolStripMenuItem";
-            this.favoritosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.favoritosToolStripMenuItem.Size = new System.Drawing.Size(101, 26);
             this.favoritosToolStripMenuItem.Text = "Favoritos";
             this.favoritosToolStripMenuItem.Click += new System.EventHandler(this.favoritosToolStripMenuItem_Click);
             // 
             // historialToolStripMenuItem
             // 
             this.historialToolStripMenuItem.Name = "historialToolStripMenuItem";
-            this.historialToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.historialToolStripMenuItem.Size = new System.Drawing.Size(96, 26);
             this.historialToolStripMenuItem.Text = "Historial";
             this.historialToolStripMenuItem.Click += new System.EventHandler(this.historialToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(61, 26);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -117,7 +119,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 128);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 16);
+            this.label1.Size = new System.Drawing.Size(174, 22);
             this.label1.TabIndex = 1;
             this.label1.Text = "Versiculos Favoritos";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -150,7 +152,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 6;
-            this.button4.Text = "Siguiente";
+            this.button4.Text = "Aletorio";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -160,14 +162,14 @@
             this.label2.Image = global::BibliaMAD.Properties.Resources.paper_bible;
             this.label2.Location = new System.Drawing.Point(62, 180);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 16);
+            this.label2.Size = new System.Drawing.Size(57, 22);
             this.label2.TabIndex = 7;
             this.label2.Text = "label2";
             this.label2.Click += new System.EventHandler(this.label2_Click_1);
             // 
             // Pagina_principal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(472, 459);
             this.Controls.Add(this.label2);

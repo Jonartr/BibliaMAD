@@ -26,6 +26,9 @@ namespace BibliaMAD
                 int rowindex = dataGridView1.CurrentCell.RowIndex;
                 var Correo = dataGridView1.Rows[rowindex].Cells[0].Value.ToString();
                 Variables_globales.conexion.Insert_Users(5, Correo);
+                Variables_globales.conexion.Contratemp(Correo);
+                MessageBox.Show("Cuenta rehabilitada", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
             }
         }
 

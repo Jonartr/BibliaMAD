@@ -36,11 +36,15 @@ namespace BibliaMAD
         private void favoritosToolStripMenuItem_Click(object sender, EventArgs e)
         {
          Variables_globales.favorito.ShowDialog();
+        // Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
+
         }
 
         private void historialToolStripMenuItem_Click(object sender, EventArgs e)
         {
            Variables_globales.historial.ShowDialog();
+         //  Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
+           
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
