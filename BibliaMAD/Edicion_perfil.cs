@@ -153,7 +153,6 @@ namespace BibliaMAD
                  passregister.Text = "";
                   nameregister.Text = "";
                   genreregister.Text = "";
-                  dateregister.Value= "";
                     this.Close();
 
                 }
