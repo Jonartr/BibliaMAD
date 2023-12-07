@@ -145,9 +145,7 @@
             this.genreregister.FormattingEnabled = true;
             this.genreregister.Items.AddRange(new object[] {
             "Masculino",
-            "Femenino",
-            "Prefiero no responder",
-            "Si"});
+            "Femenino"});
             this.genreregister.Location = new System.Drawing.Point(142, 218);
             this.genreregister.Margin = new System.Windows.Forms.Padding(3, 6, 3, 18);
             this.genreregister.Name = "genreregister";

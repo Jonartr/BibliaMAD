@@ -50,7 +50,7 @@ namespace BibliaMAD
             var Borrar_completo = MessageBox.Show("¿Esta seguro de borrar su historial", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Borrar_completo == DialogResult.Yes)
             {
-               bool ok = Variables_globales.conexion.DeleteHistory(Variables_globales.usuario, 1);
+               bool ok = Variables_globales.conexion.DeleteHistory(Variables_globales.usuario, 2);
 
                 if (ok)
                 {

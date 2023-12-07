@@ -46,12 +46,13 @@ namespace BibliaMAD
 
             if(delete == DialogResult.Yes)
             {
-                Variables_globales.conexion.DeleteFavorite(Variables_globales.usuario, 1);
+                Variables_globales.conexion.DeleteFavorite(Variables_globales.usuario, 2);
                 MessageBox.Show("Favorito borrado con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Variables_globales.Fav.Clear();
                 Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = Variables_globales.Fav;
+                Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
             }
         }
 
@@ -62,12 +63,13 @@ namespace BibliaMAD
 
             if (delete == DialogResult.Yes)
             {
-                Variables_globales.conexion.DeleteFavorite(Variables_globales.usuario, 2, idFav);
+                Variables_globales.conexion.DeleteFavorite(Variables_globales.usuario, 1, idFav);
                 MessageBox.Show("Favoritos borrados con exito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Variables_globales.Fav.Clear();
                 Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = Variables_globales.Fav;
+                Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
             }
         }
 

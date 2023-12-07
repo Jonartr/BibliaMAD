@@ -109,6 +109,7 @@
             this.Resultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Resultado.Location = new System.Drawing.Point(21, 375);
             this.Resultado.Name = "Resultado";
+            this.Resultado.ReadOnly = true;
             this.Resultado.RowHeadersWidth = 62;
             this.Resultado.Size = new System.Drawing.Size(951, 237);
             this.Resultado.TabIndex = 12;

@@ -256,14 +256,20 @@ namespace BibliaMAD
         {
 
                 int rowindex = Resultado.CurrentCell.RowIndex;
-                var Numerovers = Convert.ToInt16(Resultado.Rows[rowindex].Cells[4].Value.ToString());
-                var Texto = (Resultado.Rows[rowindex].Cells[5].Value.ToString()); 
-                bool ok = Variables_globales.conexion.AddFavorite(Variables_globales.usuario, Numerovers, Texto);
+               
+                var Texto = (Resultado.Rows[rowindex].Cells[0].Value.ToString());
+                var TestT = (Resultado.Rows[rowindex].Cells[1].Value.ToString());
+                var LT = (Resultado.Rows[rowindex].Cells[2].Value.ToString());
+                var VersTT = (Resultado.Rows[rowindex].Cells[3].Value.ToString());
+            var Numerocaps = Convert.ToInt16(Resultado.Rows[rowindex].Cells[4].Value.ToString());
+            var Numerovers = Convert.ToInt16(Resultado.Rows[rowindex].Cells[5].Value.ToString());
+                bool ok = Variables_globales.conexion.AddFavorite(Variables_globales.usuario, Numerovers, Texto,
+                   TestT, VersTT, LT, Numerocaps);
 
                 if (ok)
                 {
                     MessageBox.Show("Versiculo agregado correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                Variables_globales.conexion.GetFavorito(Variables_globales.usuario);
                 }
 
 

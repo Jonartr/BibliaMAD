@@ -31,31 +31,35 @@ namespace BibliaMAD
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
         {
          Variables_globales.consulta.ShowDialog();
+            audio.SpeakAsyncCancelAll();
         }
 
         private void favoritosToolStripMenuItem_Click(object sender, EventArgs e)
         {
          Variables_globales.favorito.ShowDialog();
-        // Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
+            audio.SpeakAsyncCancelAll();
+            // Variables_globales.conexion.GetFavorite(Variables_globales.usuario);
 
         }
 
         private void historialToolStripMenuItem_Click(object sender, EventArgs e)
         {
            Variables_globales.historial.ShowDialog();
-         //  Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
-           
+            audio.SpeakAsyncCancelAll();
+            //  Variables_globales.conexion.MostrarHistorialUsuarioActivo(Variables_globales.usuario);
+
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+            audio.SpeakAsyncCancelAll();
         }
 
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Variables_globales.editar.ShowDialog();
-    
+            audio.SpeakAsyncCancelAll();
         }
 
         private void inhabilitarseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -132,6 +136,7 @@ namespace BibliaMAD
         private void Pagina_principal_FormClosed(object sender, FormClosedEventArgs e)
         {
             Variables_globales.isesion.Show();
+            audio.SpeakAsyncCancelAll();
         }
     }
 }

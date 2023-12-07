@@ -75,51 +75,58 @@ namespace BibliaMAD
             var Cumple = dateregister.Value;
             var OpcGenero = 0;
 
-            if (regexemail.IsMatch(Correo) && emailregister.Text != null)
-            {
-                ok++;
-            }
-            else
-            {
-                MessageBox.Show("Revise que el formato del correo este correcto", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        
 
-            }
-
-            if (regexpass.IsMatch(Contraseña) && passregister.Text != null)
-            {
-                ok++;
-            }
-            else
-            {
-                MessageBox.Show("La contraseña debe tener al menos 8 caracteres\nUna Mayúscula y Minúscula\nY un caracter especial", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-            }
-
+        
 
             var existe = false;
-            for(int i  = 0; i <Convert.ToInt16(Variables_globales.Consultas.Rows.Count); i++)
+          
+
+            if (passregister.Text != "")
             {
-                if (Contraseña.Equals(Convert.ToString(Variables_globales.Consultas.Rows[i]["Contraseña"])))
+
+                if (passregister.Text != "")
                 {
-                    MessageBox.Show("La contraseña no debe ser igual a las " +
-                        "\nultimas 2 contraseñas ingresadas", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    existe = true;
+                    if (regexpass.IsMatch(Contraseña))
+                    {
+
+                        for (int i = 0; i < Convert.ToInt16(Variables_globales.Consultas.Rows.Count); i++)
+                        {
+                            if (Contraseña.Equals(Convert.ToString(Variables_globales.Consultas.Rows[i]["Contraseña"])))
+                            {
+                                MessageBox.Show("La contraseña no debe ser igual a las " +
+                                    "\nultimas 2 contraseñas ingresadas", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                existe = true;
+                            }
+                          
+
+                        }
+
+                        if (!existe)
+                        {
+                            ok++;
+                        }
+                       
+                    }
+                    else
+                    { 
+                        MessageBox.Show("La contraseña debe tener al menos 8 caracteres\nUna Mayúscula y Minúscula\nY un caracter especial", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
                 }
-               
-            }
-
-            if (!existe){
-                ok++;
-            }
-
-            if (regexletter.IsMatch(Nombre) && nameregister!=null)
-            {
-                ok++;
+              
             }
             else
             {
-                MessageBox.Show("El nombre solo deben ser letras", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                for (int i = 0; i < Convert.ToInt16(Variables_globales.Consultas.Rows.Count); i++)
+                {
+                    if (2.Equals(Convert.ToInt16(Variables_globales.Consultas.Rows[i]["Indice_Contraseña"])))
+                    {
+                        Contraseña = Convert.ToString(Variables_globales.Consultas.Rows[i]["Contraseña"]);
+                        ok++;
+                    }
 
+                }
             }
 
             if (Genero.Equals("Masculino"))
@@ -132,21 +139,26 @@ namespace BibliaMAD
                 OpcGenero = 2;
                 ok++;
             }
-            else
-            {
-                MessageBox.Show("Seleccione un Genero", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
 
-            if (ok == 5)
+            if(ok == 2)
             {
-                bool register = Variables_globales.conexion.Insert_Users(2 ,Correo, Contraseña, Nombre, Cumple, OpcGenero);
+                bool register = Variables_globales.conexion.Insert_Users(2, Correo, Contraseña, Nombre, Cumple, OpcGenero);
+                Variables_globales.conexion.EDGetUser(Variables_globales.usuario);
 
                 if (register)
                 {
                     MessageBox.Show("Informacion actualizada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                 emailregister.Text = "";
+                 passregister.Text = "";
+                  nameregister.Text = "";
+                  genreregister.Text = "";
+                  dateregister.Value= "";
                     this.Close();
+
                 }
             }
+         
         }
     }
 }

@@ -635,7 +635,8 @@ namespace BibliaMAD
 
 
 
-        public bool AddFavorite(string Correo, int NumeroV, string Texto)
+        public bool AddFavorite(string Correo, int NumeroV, string Texto, string Testamento, 
+            string Version,string Libro, int Capitulo)
         {
             var msg = "";
             var add = false;
@@ -655,6 +656,18 @@ namespace BibliaMAD
 
                 var parametro3 = _comandosql.Parameters.Add("@Texto", SqlDbType.Char, 255);
                 parametro3.Value = Texto;
+
+                var parametro4 = _comandosql.Parameters.Add("@Testamento", SqlDbType.Char, 255);
+                parametro4.Value = Testamento;
+
+                var parametro5 = _comandosql.Parameters.Add("@Version", SqlDbType.Char, 255);
+                parametro5.Value = Version;
+
+                var parametro6 = _comandosql.Parameters.Add("@Libro", SqlDbType.Char, 255);
+                parametro6.Value = Libro;
+
+                var parametro7 = _comandosql.Parameters.Add("@NumeroCap", SqlDbType.Int);
+                parametro7.Value = Capitulo;
 
                 _adaptador.InsertCommand = _comandosql;
 
